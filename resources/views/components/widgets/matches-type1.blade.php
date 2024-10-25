@@ -9,7 +9,7 @@
         @foreach ($matches as $match )
             <a href="#" class="flex w-full px-1 py-2 mb-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="flex self-center w-2/6 text-sm align-middle font-bebas ">
-                    <img class="object-contain w-8 h-8 mr-3" src="{{ $match->sportTeam1->image }}" alt="{{ $match->sportTeam1->name }}">
+                    <img class="object-contain w-8 h-8 mr-3" src="{{ asset('storage/'.$match->sportTeam1->image) }}" alt="{{ $match->sportTeam1->name }}">
                     <div class="self-center text-xs align-middle">
                         {{ $match->sportTeam1->name }}
                     </div>
@@ -20,7 +20,7 @@
                     </span>
                 </div>
                 <div class="flex self-center w-2/6 text-sm align-middle ">
-                    <img class="object-contain w-8 h-8 mr-3" src="{{ $match->sportTeam2->image }}" alt="{{ $match->sportTeam2->name }}">
+                    <img class="object-contain w-8 h-8 mr-3" src="{{ asset('storage/'.$match->sportTeam2->image) }}" alt="{{ $match->sportTeam2->name }}">
                     <div class="self-center text-xs align-middle font-bebas">
                         {{ $match->sportTeam2->name }}
                     </div>

@@ -6,7 +6,7 @@
         @foreach ($posts as $post)
         <div class="mb-5 md:flex-row">
             <a href="{{ route('frontend.posts.show', $post->slug) }}">
-                <img class="object-cover w-full my-auto mb-3 rounded-lg h-60 me-2" src="/{{ $post->cover_photo_path }}" alt="{{ $post->title }}">
+                <img class="object-cover w-full my-auto mb-3 rounded-lg h-60 me-2" src="{{ asset('storage/'.$post->cover_photo_path) }}" alt="{{ $post->title }}">
             </a>
             <div>
                 <h2 class="flex font-semibold">

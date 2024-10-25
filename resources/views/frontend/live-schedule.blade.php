@@ -53,7 +53,7 @@
                 </div>
                 <x-widgets.tags-list :tags="$tags"/>
                 <div class="mt-5 mb-5 ads-1">
-                    <img class="w-full rounded" src="{{ "/".$ads1 }}" alt="ads-1">
+                    <img class="w-full rounded" src="{{ asset('storage/'.$ads1) }}" alt="ads-1">
                 </div>
                 <x-blog-post-list :posts="$latest" :title="'LATEST NEWS'" />
             </div>

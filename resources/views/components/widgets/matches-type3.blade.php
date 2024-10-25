@@ -10,17 +10,17 @@
                 <div class="self-center align-middle w-14" style="font-size: 9px">
                     {{ date('H:iA d/m/Y',strtotime($match->date_time)) }}
                 </div>
-                <div class="flex self-center text-sm align-middle ">
-                    <div class="flex self-center text-xs align-middle font-bebas">
-                        <div class="flex w-20 sm:w-36">
-                            <img class="object-contain w-8 h-8 mr-3" src="{{ $match->sportTeam1->image }}" alt="{{ $match->sportTeam1->name }}">
+                <div class="flex self-center text-sm align-middle grow ">
+                    <div class="grid self-center grid-cols-12 gap-1 text-xs align-middle grow font-bebas">
+                        <div class="flex col-span-4">
+                            <img class="object-contain w-8 h-8 mr-3" src="{{ asset('storage/'.$match->sportTeam1->image) }}" alt="{{ $match->sportTeam1->name }}">
                             <div class="self-center">
                                 {{ $match->sportTeam1->name }}
                             </div>
                         </div>
-                        <div class="self-center w-10 text-xl text-center">VS</div>
-                        <div class="flex w-20 sm:w-36">
-                            <img class="object-contain w-8 h-8 mr-3" src="{{ $match->sportTeam2->image }}" alt="{{ $match->sportTeam1->name }}">
+                        <div class="self-center col-span-4 text-xl text-center">VS</div>
+                        <div class="flex col-span-4">
+                            <img class="object-contain w-8 h-8 mr-3" src="{{ asset('storage/'.$match->sportTeam2->image) }}" alt="{{ $match->sportTeam1->name }}">
                             <div class="self-center">
                                 {{ $match->sportTeam2->name }}
                             </div>
