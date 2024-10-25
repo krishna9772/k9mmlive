@@ -13,7 +13,7 @@
                 <x-image-slider>
                     @foreach ($sliders as   $slider)
                         <div class="swiper-slide">
-                            <x-image class="mx-auto" :src="$slider->image" :alt="$slider->title" />
+                            <x-image class="mx-auto" :src=" asset("storage/".$slider->image)" :alt="$slider->title" />
                         </div>
                     @endforeach
                 </x-image-slider>
