@@ -98,7 +98,10 @@ return [
         //     ],
         //
         // ],
-
+        'fontawesome' => [
+            'path' => 'public/vendor/blade-fontawesome',
+            'prefix' => 'fa',
+        ],
     ],
 
     /*

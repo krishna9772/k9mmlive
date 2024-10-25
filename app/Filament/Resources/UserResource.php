@@ -18,6 +18,7 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
+use Illuminate\Database\Eloquent\Model;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 
 class UserResource extends Resource
@@ -70,7 +71,7 @@ class UserResource extends Resource
                 ->dehydrateStateUsing(static function ($state) use ($form) {
                     return !empty($state)
                             ? Hash::make($state)
-                            : User::find($form->getColumns())?->password;
+                            : User::find($form->getColumns())->first()?->password;
                 }),
         ];
 
@@ -80,6 +81,7 @@ class UserResource extends Resource
                 ->multiple()
                 ->preload()
                 ->relationship('roles', 'name')
+                ->getOptionLabelFromRecordUsing(fn(Model $record) => ucwords(str_replace('_', ' ', $record->name)))
                 ->label(trans('filament-users::user.resource.roles'));
         }
 

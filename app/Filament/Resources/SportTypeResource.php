@@ -39,7 +39,10 @@ class SportTypeResource extends Resource
                     ->searchable()
                     ->required()
                     ->default(Status::Active->value),
-                IconPicker::make('icon')->cacheable(true)->preload(true),
+                IconPicker::make('icon')
+                    ->sets(['heroicons', 'fontawesome-solid'])
+                    ->cacheable(true)
+                    ->preload(true),
                 RichEditor::make('description')
                     ->columnSpanFull(),
             ])->columns(3);

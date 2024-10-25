@@ -65,8 +65,8 @@ class SportLeagueResource extends Resource
                     ->sortable()
                     ->label('Sport Type'),
                 Tables\Columns\TextColumn::make('status')
-                    ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sports Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Top Bar -->
+    <div class="flex items-center justify-between px-6 py-2 text-sm text-white bg-gray-900">
+        <div class="flex items-center space-x-4">
+            <a href="#" class="text-white hover:text-gray-400">MM</a>
+            <span>|</span>
+            <a href="#" class="text-white hover:text-gray-400">ENG</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="#" class="hover:text-gray-400">Register</a>
+            <span>|</span>
+            <a href="#" class="hover:text-gray-400">Login</a>
+            <!-- Dark/Light mode toggle switch -->
+            <button id="theme-toggle" class="p-1 ml-4 text-white bg-gray-700 rounded focus:outline-none">
+                <svg id="theme-icon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 4.5a.75.75 0 01.75-.75h.75V2a.75.75 0 111.5 0v1.75h.75a.75.75 0 010 1.5h-1.5A.75.75 0 0110 4.5zM5.808 4.808a.75.75 0 111.061-1.06l.885.885a.75.75 0 01-1.061 1.06l-.885-.884zM2 10.75a.75.75 0 110-1.5h1.75a.75.75 0 110 1.5H2zM4.808 15.192a.75.75 0 01-1.061 0 .75.75 0 010-1.061l.885-.884a.75.75 0 111.061 1.06l-.885.885zm4.39 1.557a.75.75 0 010 1.5h-.75v1.75a.75.75 0 01-1.5 0v-1.75H6.5a.75.75 0 010-1.5h1.5zM15.192 4.808a.75.75 0 01.884 1.06l-.884.885a.75.75 0 01-1.061-1.06l.885-.885zM19.25 10a.75.75 0 01-.75.75h-1.75a.75.75 0 110-1.5h1.75a.75.75 0 01.75.75zm-3.557 4.39a.75.75 0 111.06 1.061l-.885.885a.75.75 0 01-1.06-1.061l.885-.885z"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
+          <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+              <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+          </a>
+          <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+              <span class="sr-only">Open main menu</span>
+              <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+              </svg>
+          </button>
+          <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <li>
+                <a href="#" class="block px-3 py-2 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
+              </li>
+              <li>
+                <a href="#" class="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
+              </li>
+              <li>
+                <a href="#" class="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
+              </li>
+              <li>
+                <a href="#" class="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
+              </li>
+              <li>
+                <a href="#" class="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <!-- Main Content -->
+    <div class="container py-8 mx-auto">
+        <div class="flex flex-wrap">
+            <!-- Left Section: Football Categories & Social Media -->
+            <aside class="w-full p-4 bg-white rounded shadow-md md:w-1/4">
+                <h2 class="mb-4 text-lg font-bold">Football</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-600 hover:text-blue-600">UEFA Champions</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-blue-600">Premier League</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-blue-600">Europe League</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-blue-600">LaLiga</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-blue-600">Serie A</a></li>
+                </ul>
+
+                <div class="mt-8">
+                    <h2 class="mb-4 text-lg font-bold">Follow Us on Social Media</h2>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="flex items-center space-x-2"><span class="px-2 py-1 text-white bg-blue-600 rounded-full">FB</span> <span>Facebook</span></a></li>
+                        <li><a href="#" class="flex items-center space-x-2"><span class="px-2 py-1 text-white bg-blue-400 rounded-full">TW</span> <span>Twitter</span></a></li>
+                        <li><a href="#" class="flex items-center space-x-2"><span class="px-2 py-1 text-white bg-pink-600 rounded-full">IG</span> <span>Instagram</span></a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Right Main Content -->
+            <main class="w-full p-4 md:w-3/4">
+                <div class="p-6 mb-6 text-white bg-blue-600 rounded shadow-md">
+                    <h1 class="text-2xl font-bold">Soccer is My Passion!</h1>
+                    <p class="mt-2">Live football matches, highlights, and sports news.</p>
+                </div>
+
+                <!-- Trending News Section -->
+                <section class="p-4 mb-6 bg-white rounded shadow-md">
+                    <h2 class="mb-4 text-lg font-bold">Trending Transfer News</h2>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="block text-gray-700 hover:text-blue-600">Player X joins team Y in a record-breaking transfer.</a></li>
+                        <li><a href="#" class="block text-gray-700 hover:text-blue-600">Coach Z extends contract with club A until 2026.</a></li>
+                    </ul>
+                </section>
+
+                <!-- Advertisement Section (Right) -->
+                <div class="mt-6">
+                    <img src="ad-banner.png" alt="Advertisement" class="w-full rounded shadow-md"> <!-- Replace with actual image -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="p-4 mt-8 text-white bg-gray-800">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 K9MM Sports. All Rights Reserved.</p>
+            <p class="mt-2">
+                <a href="#" class="text-gray-400 hover:text-white">About Us</a> |
+                <a href="#" class="text-gray-400 hover:text-white">FAQ</a> |
+                <a href="#" class="text-gray-400 hover:text-white">Feedback</a> |
+                <a href="#" class="text-gray-400 hover:text-white">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Tailwind CSS with Alpine.js or Vanilla JS for Menu Toggle -->
+    <script>
+
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        let isDark = false;
+
+        themeToggle.addEventListener('click', () => {
+            isDark = !isDark;
+            document.body.classList.toggle('bg-gray-900', isDark);
+            document.body.classList.toggle('bg-white', !isDark);
+            themeIcon.classList.toggle('text-yellow-300', isDark);
+            themeIcon.classList.toggle('text-gray-600', !isDark);
+        });
+    </script>
+</body>
+</html>
