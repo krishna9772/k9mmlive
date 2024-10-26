@@ -26,9 +26,9 @@ class HomeController extends Controller
         $sliders = ImageSlider::where('status', Status::Active->value)->get();
         $types = SportType::where('status', Status::Active->value)->get();
 
-        $latest = Post::published()->limit(4)->orderBy('id', 'desc')->get();
+        $latest = Post::published()->notWhere('slug','about-us')->limit(4)->orderBy('id', 'desc')->get();
 
-        $popular = Post::published()->limit(3)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->notWhere('slug','about-us')->limit(3)->orderBy('id', 'desc')->get();
 
         $matches = SportMatch::where('status', Status::Active->value)->get();
         $socials = SocialLink::where('status', Status::Active->value)->orderBy('sort')->get();
@@ -43,9 +43,9 @@ class HomeController extends Controller
             return $query->where('category_id', '=', $parent->id);
         })->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',10));
 
-        $latest = Post::published()->limit(4)->orderBy('id', 'desc')->get();
+        $latest = Post::published()->notWhere('slug','about-us')->limit(4)->orderBy('id', 'desc')->get();
 
-        $popular = Post::published()->limit(3)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->notWhere('slug','about-us')->limit(3)->orderBy('id', 'desc')->get();
 
         $trendings = AppHelper::getTrendingNews(5);
 
@@ -61,9 +61,9 @@ class HomeController extends Controller
         if(!$post){
             abort(404);
         }
-        $latest = Post::published()->limit(4)->orderBy('id', 'desc')->get();
+        $latest = Post::published()->notWhere('slug','about-us')->limit(4)->orderBy('id', 'desc')->get();
 
-        $popular = Post::published()->limit(3)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->notWhere('slug','about-us')->limit(3)->orderBy('id', 'desc')->get();
 
         $trendings = AppHelper::getTrendingNews(5);
 
@@ -84,9 +84,9 @@ class HomeController extends Controller
             return $query->where('tag_id', '=', $parent->id);
         })->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',10));
 
-        $latest = Post::published()->limit(4)->orderBy('id', 'desc')->get();
+        $latest = Post::published()->notWhere('slug','about-us')->limit(4)->orderBy('id', 'desc')->get();
 
-        $popular = Post::published()->limit(3)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->notWhere('slug','about-us')->limit(3)->orderBy('id', 'desc')->get();
 
         $trendings = AppHelper::getTrendingNews(5);
 
@@ -107,9 +107,9 @@ class HomeController extends Controller
             return $query->where('category_id', '=', $parent->id);
         })->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',10));
 
-        $latest = Post::published()->limit(4)->orderBy('id', 'desc')->get();
+        $latest = Post::published()->notWhere('slug','about-us')->limit(4)->orderBy('id', 'desc')->get();
 
-        $popular = Post::published()->limit(3)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->notWhere('slug','about-us')->limit(3)->orderBy('id', 'desc')->get();
 
         $trendings = AppHelper::getTrendingNews(5);
 
@@ -138,8 +138,8 @@ class HomeController extends Controller
         $esports = AppHelper::esportMatches($date);
 
         $parent = AppHelper::getSportNewsCategory();
-        $latest = Post::published()->limit(4)->orderBy('id', 'desc')->get();
-        $popular = Post::published()->limit(3)->orderBy('id', 'desc')->get();
+        $latest = Post::published()->notWhere('slug','about-us')->limit(4)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->notWhere('slug','about-us')->limit(3)->orderBy('id', 'desc')->get();
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
 
@@ -151,8 +151,8 @@ class HomeController extends Controller
         $matches = SportMatch::where('status', Status::Active->value)->orderBy('date_time','desc')->paginate(env('PAGE_SIZE',10));
 
         $parent = AppHelper::getSportNewsCategory();
-        $latest = Post::published()->limit(4)->orderBy('id', 'desc')->get();
-        $popular = Post::published()->limit(3)->orderBy('id', 'desc')->get();
+        $latest = Post::published()->notWhere('slug','about-us')->limit(4)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->notWhere('slug','about-us')->limit(3)->orderBy('id', 'desc')->get();
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
 
@@ -163,8 +163,8 @@ class HomeController extends Controller
 
         $post = Post::where('slug','about-us')->where('status', 'published')->firstOrFail();
         $parent = AppHelper::getSportNewsCategory();
-        $latest = Post::published()->limit(4)->orderBy('id', 'desc')->get();
-        $popular = Post::published()->limit(3)->orderBy('id', 'desc')->get();
+        $latest = Post::published()->notWhere('slug','about-us')->limit(4)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->notWhere('slug','about-us')->limit(3)->orderBy('id', 'desc')->get();
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
 
