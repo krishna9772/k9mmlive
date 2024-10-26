@@ -19,7 +19,6 @@ class AppHelper
      public static function footBallMatches($date=null,$limit=null)
      {
         $type = SportType::where('status', Status::Active->value)->whereIn('name', ['football',"Football",'Foot Ball','foot ball'])->first();
-
         $query = SportMatch::where('status', Status::Active->value)->where('sport_type_id', $type->id??0);
         if($limit){
             $query = $query->limit($limit);
@@ -49,7 +48,6 @@ class AppHelper
         return self::footBallMatches($date,$limit);
 
         $type = SportType::where('status', Status::Active->value)->whereIn('name', ['esport',"Esport"])->first();
-
         $query = SportMatch::where('status', Status::Active->value)->where('sport_type_id', $type->id??0);
         if($limit){
             $query = $query->limit($limit);
@@ -63,6 +61,11 @@ class AppHelper
      public static function getSportNewsCategory(){
 
         return Category::where('slug', 'sport-news')->first();
+     }
+
+     public static function getNewsCatId(){
+        $cat = self::getSportNewsCategory();
+        return $cat? $cat->id : null;
      }
 
      public static function getVideosCategory(){
