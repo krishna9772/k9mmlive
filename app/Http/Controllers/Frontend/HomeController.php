@@ -158,4 +158,16 @@ class HomeController extends Controller
 
         return view('frontend.live-match', compact('matches','parent','latest','popular','trendings','tags'));
     }
+
+    public function aboutUs(Request $request){
+
+        $post = Post::where('slug','about-us')->where('status', 'published')->firstOrFail();
+        $parent = AppHelper::getSportNewsCategory();
+        $latest = Post::published()->limit(4)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->limit(3)->orderBy('id', 'desc')->get();
+        $trendings = AppHelper::getTrendingNews(5);
+        $tags = Tag::get();
+
+        return view('frontend.about-us', compact('post','parent','latest','popular','trendings','tags'));
+    }
 }

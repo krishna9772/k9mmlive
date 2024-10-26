@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex items-center shrink-0 grow">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="/">
                         <x-application-mark class="block w-auto h-9" />
                     </a>
                 </div>
@@ -27,7 +27,7 @@
                     <x-nav-link href="/live-schedule" :active="request()->is('*live-schedule*')">
                         <span class="text-xl text-uppercase">{{ __('Live Schedule') }}</span>
                     </x-nav-link>
-                    <x-nav-link href="/" :active="request()->routeIs('/')">
+                    <x-nav-link href="/about-us" :active="request()->is('*about-us*')">
                         <span class="text-xl text-uppercase">{{ __('About Us') }}</span>
                     </x-nav-link>
                 </div>

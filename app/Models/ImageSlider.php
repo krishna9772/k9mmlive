@@ -15,4 +15,13 @@ class ImageSlider extends Model
         'status',
         'description',
     ];
+
+    protected $appends = [
+        'image_path',
+    ];
+
+    public function getImagePathAttribute()
+    {
+        return asset('storage/'.$this->image);
+    }
 }

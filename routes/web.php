@@ -13,6 +13,7 @@ Route::get('/language', function () {
 
 Route::get('/live-match', [HomeController ::class, 'liveMatch'])->name('frontend.live-match');
 Route::get('/live-schedule', [HomeController ::class, 'liveSchedule'])->name('frontend.live-schedule');
+Route::get('/about-us', [HomeController ::class, 'aboutUs'])->name('frontend.aboutus');
 Route::get('/tag/{slug}', [HomeController ::class, 'tags'])->name('frontend.tags.show');
 Route::get('/{slug}', [HomeController ::class, 'post'])->name('frontend.posts.show');
 Route::get('/category/{slug}', [HomeController ::class, 'category'])->name('frontend.categories.show');
