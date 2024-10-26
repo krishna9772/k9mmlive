@@ -12,7 +12,7 @@
         <div class="{{ !$first? "mt-3":"" }} ">
             <h2 id="accordion-sport-type-heading-{{$type->id}}" class="accordion-heading">
                 <button type="button" class="flex items-center justify-between w-full gap-3 p-3 font-medium text-gray-500 bg-white border border-gray-200 dark:bg-gray-700 border-b-1 rtl:text-right rounded-xl dark:border-gray-700 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-sport-type-body-{{$type->id}}" aria-expanded="{{ $first? 'true':'false' }}" aria-controls="accordion-sport-type-body-{{$type->id}}">
-                    <span>{{$type->name}}</span>
+                    <span>{{ $type->name }}</span>
                     <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
                     </svg>

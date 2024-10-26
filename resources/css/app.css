@@ -12,3 +12,29 @@
     --primary-color: #f00;
     --secondary-color: #000;
 }
+
+html[lang="my"] *{
+    /*font-family: 'Noto Sans Myanmar', sans-serif !important;*/
+
+    nav {
+        .font-bebas {
+            font-weight: 700;
+        }
+    }
+
+    .text-xl{
+        font-size: 14px;
+    }
+    .text-6xl{
+        font-size: 30px;
+    }
+    .text-2xl{
+        font-size: 16px;
+    }
+    .banner{
+        h1{
+            margin-bottom: 20px;
+        }
+    }
+}
+

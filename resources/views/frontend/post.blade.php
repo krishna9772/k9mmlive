@@ -2,7 +2,7 @@
     $ads1 = \App\Helpers\AppHelper::settings("ads_image1");
 @endphp
 <x-app-layout>
-    <div class="px-4 pt-5 mx-auto min-h-30 max-w-7xl sm:px-6 lg:px-8">
+    <div class="px-4 pt-5 mx-auto banner min-h-30 max-w-7xl sm:px-6 lg:px-8">
         <div class="">
             <div class="flex text-sm text-center dark:text-white ">
                 <a href="{{ url('/') }}" class="font-bold text-red-600">{{ __('Home') }}</a>

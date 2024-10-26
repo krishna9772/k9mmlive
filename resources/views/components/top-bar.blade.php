@@ -10,11 +10,11 @@
             </button>
 
             <div class="flex items-center space-x-4">
-                <x-nav-link href="{{ route('language') }}" :active="request()->routeIs('language')">
+                <x-nav-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])) }}?lang=my" :active="app()->getLocale()==='my'" class="font-bold">
                     {{ __('MM') }}
                 </x-nav-link>
                 <span class="text-gray-500 dark:text-gray-400">|</span>
-                <x-nav-link href="{{ route('register') }}" :active="request()->routeIs('language')">
+                <x-nav-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])) }}?lang=en" :active="app()->getLocale()==='en'" class="font-bold">
                     {{ __('ENG') }}
                 </x-nav-link>
             </div>

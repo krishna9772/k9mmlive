@@ -25,17 +25,31 @@
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
 
             <p class="text-sm leading-5 text-gray-700 dark:text-gray-400">
-                {!! __('Showing') !!}
-                @if ($paginator->firstItem())
-                    <span class="font-medium">{{ $paginator->firstItem() }}</span>
-                    {!! __('to') !!}
-                    <span class="font-medium">{{ $paginator->lastItem() }}</span>
+                @if (\App\Helpers\AppHelper::isMM())
+                    {!! __('results') !!}
+                    <span class="font-medium">{{ $paginator->total() }}</span>
+                    {!! __('of') !!}
+                    @if ($paginator->firstItem())
+                        <span class="font-medium">{{ $paginator->firstItem() }}</span>
+                        {!! __('from') !!}
+                        <span class="font-medium">{{ $paginator->lastItem() }}</span>
+                    @else
+                        {{ $paginator->count() }}
+                    @endif
+                    {!! __('Showing') !!}
                 @else
-                    {{ $paginator->count() }}
+                    {!! __('Showing') !!}
+                    @if ($paginator->firstItem())
+                        <span class="font-medium">{{ $paginator->firstItem() }}</span>
+                        {!! __('to') !!}
+                        <span class="font-medium">{{ $paginator->lastItem() }}</span>
+                    @else
+                        {{ $paginator->count() }}
+                    @endif
+                    {!! __('of') !!}
+                    <span class="font-medium">{{ $paginator->total() }}</span>
+                    {!! __('results') !!}
                 @endif
-                {!! __('of') !!}
-                <span class="font-medium">{{ $paginator->total() }}</span>
-                {!! __('results') !!}
             </p>
         </div>
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-end">

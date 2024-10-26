@@ -8,6 +8,7 @@ use App\Models\SportType;
 use App\Settings\GeneralSettings;
 use Firefly\FilamentBlog\Models\Category;
 use Firefly\FilamentBlog\Models\Post;
+use Illuminate\Support\Facades\Session;
 
 class AppHelper
 {
@@ -88,5 +89,9 @@ class AppHelper
      public static function instance()
      {
          return new AppHelper();
+     }
+
+     public static function isMM(){
+        return Session::get('lang') == 'my';
      }
 }
