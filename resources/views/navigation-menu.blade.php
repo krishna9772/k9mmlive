@@ -59,9 +59,24 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            <x-nav-link href="{{ url('/') }}" :active="request()->is('/')">
+                <span class="text-xl text-uppercase">{{ __('Home') }}</span>
+            </x-nav-link>
+            <x-nav-link href="/live-match" :active="request()->is('*live-match*')">
+                <span class="text-xl text-uppercase">{{ __('Live Match') }}</span>
+            </x-nav-link>
+            <x-nav-link href="/category/sport-news" :active="request()->is('*sport-news*')">
+                <span class="text-xl text-uppercase">{{ __('Sport News') }}</span>
+            </x-nav-link>
+            <x-nav-link href="/category/videos" :active="request()->is('*videos*')">
+                <span class="text-xl text-uppercase">{{ __('Videos') }}</span>
+            </x-nav-link>
+            <x-nav-link href="/live-schedule" :active="request()->is('*live-schedule*')">
+                <span class="text-xl text-uppercase">{{ __('Live Schedule') }}</span>
+            </x-nav-link>
+            <x-nav-link href="/about-us" :active="request()->is('*about-us*')">
+                <span class="text-xl text-uppercase">{{ __('About Us') }}</span>
+            </x-nav-link>
         </div>
         @if (Auth::user())
         <!-- Responsive Settings Options -->
