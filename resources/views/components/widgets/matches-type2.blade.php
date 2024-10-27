@@ -6,7 +6,7 @@
     </div>
     <div class="mt-3 dark:text-white">
         @foreach ($matches as $match )
-            <a href="{{ $match->live_link }}" class="flex w-full px-5 py-2 mb-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <a target="_blank" href="{{ $match->live_link }}" class="flex w-full px-5 py-2 mb-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="flex self-center w-2/3 text-sm align-middle ">
 
                     <div class="flex self-center text-xs align-middle font-bebas">
