@@ -78,7 +78,7 @@
                 <span class="mx-auto text-xl text-uppercase">{{ __('About Us') }}</span>
             </x-nav-link>
         </div>
-        @if (Auth::user())
+        @if (false && Auth::user())
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="flex items-center px-4">
