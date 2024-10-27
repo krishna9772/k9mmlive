@@ -7,7 +7,9 @@ use App\Helpers\AppHelper;
 use App\Http\Controllers\Controller;
 use App\Models\ImageSlider;
 use App\Models\SocialLink;
+use App\Models\SportLeague;
 use App\Models\SportMatch;
+use App\Models\SportTeam;
 use App\Models\SportType;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
@@ -21,11 +23,14 @@ use Illuminate\Support\Str;
 class HomeController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $sliders = ImageSlider::where('status', Status::Active->value)->get();
         $types = SportType::where('status', Status::Active->value)->get();
         $cat_id = AppHelper::getNewsCatId();
+
+        $date = $request->date?? null;
+        if($date) $date=Carbon::parse($date);
 
         $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
@@ -39,10 +44,14 @@ class HomeController extends Controller
             return $query;
         })->limit(3)->orderBy('id', 'desc')->get();
 
-        $matches = SportMatch::where('status', Status::Active->value)->get();
+        $matches = SportMatch::where('status', Status::Active->value);
+        if($date){
+            $matches = $matches->whereDate('date_time', $date);
+        }
+        $matches = $matches->get();
         $socials = SocialLink::where('status', Status::Active->value)->orderBy('sort')->get();
 
-        return view('frontend.home', compact('sliders','types','latest','popular','matches','socials'));
+        return view('frontend.home', compact('date','sliders','types','latest','popular','matches','socials'));
     }
 
     public function sportnews(Request $request){
@@ -241,5 +250,41 @@ class HomeController extends Controller
         $tags = Tag::get();
 
         return view('frontend.about-us', compact('post','parent','latest','popular','trendings','tags'));
+    }
+
+    public function leagues(Request $request,$slug){
+
+        $league = SportLeague::where('slug',$slug)->firstorfail();
+
+        $date = $_GET['date']?? null;
+        $cat_id = AppHelper::getNewsCatId();
+        if($date){
+            try{
+                $date = CarbonImmutable::parse($date);
+            }catch (\Exception $exception){
+                $date = null;
+            }
+        }
+
+        if(!$date){
+            $date = CarbonImmutable::now() ;
+        }
+        $matches = SportMatch::where('status', Status::Active->value)->where('sport_league_id',$league->id)->orderBy('date_time','desc')->get();
+
+        $parent = AppHelper::getSportNewsCategory();
+        $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+            if($cat_id)
+                return $query->where('category_id', '=', $cat_id);
+            return $query;
+        })->limit(4)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+            if($cat_id)
+                return $query->where('category_id', '=', $cat_id);
+            return $query;
+        })->limit(3)->orderBy('id', 'desc')->get();
+        $trendings = AppHelper::getTrendingNews(5);
+        $tags = Tag::get();
+
+        return view('frontend.leagues', compact('matches','league','parent','latest','popular','trendings','tags'));
     }
 }

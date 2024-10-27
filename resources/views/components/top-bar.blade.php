@@ -1,4 +1,8 @@
 <!-- Top Bar -->
+@php
+$params = request()->all();
+if(isset($params['lang'])) unset($params['lang']);
+@endphp
 <div id="top-bar" class="items-center justify-between px-6 py-2 text-sm bg-neutral-100 dark:bg-gray-900">
     <div class="flex justify-end px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 
@@ -10,11 +14,11 @@
             </button>
 
             <div class="flex items-center space-x-4">
-                <x-nav-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])) }}?lang=my" :active="app()->getLocale()==='my'" class="font-bold">
+                <x-nav-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=my':'?lang=my') }}" :active="app()->getLocale()==='my'" class="font-bold">
                     {{ __('MM') }}
                 </x-nav-link>
                 <span class="text-gray-500 dark:text-gray-400">|</span>
-                <x-nav-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])) }}?lang=en" :active="app()->getLocale()==='en'" class="font-bold">
+                <x-nav-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=en':'?lang=en') }}" :active="app()->getLocale()==='en'" class="font-bold">
                     {{ __('ENG') }}
                 </x-nav-link>
             </div>
