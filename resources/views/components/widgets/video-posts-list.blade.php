@@ -2,7 +2,7 @@
 
 <div class="p-3">
     <h5 class="mb-5 text-2xl tracking-tight text-gray-900 font-bebas dark:text-white">{{ __($title) }}</h5>
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid-cols-1 gap-4 md:grid-cols-3">
         @foreach ($posts as $post)
         <div class="mb-5 md:flex-row">
             <a href="{{ route('frontend.posts.show', $post->slug) }}">
