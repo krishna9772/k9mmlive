@@ -15,9 +15,12 @@
                     </div>
                 </div>
                 <div class="self-center w-16 text-sm text-center align-middle">
-                    <span class="bg-gray-200 mx-2 font-bold font-bebas text-gray-800 text-md me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                        {{ $match->score1 }}:{{ $match->score2 }}
-                    </span>
+                    @if ($match->score1 || $match->score2)
+                        <span class="bg-gray-200 mx-2 font-bold font-bebas text-gray-800 text-md me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+                            {{ $match->score1 }}:{{ $match->score2 }}
+                        </span>
+                    @endif
+
                 </div>
                 <div class="flex self-center w-2/6 text-sm align-middle ">
                     <img class="object-contain w-8 h-8 mr-3" src="{{ asset('storage/'.$match->sportTeam2->image) }}" alt="{{ $match->sportTeam2->name }}">
