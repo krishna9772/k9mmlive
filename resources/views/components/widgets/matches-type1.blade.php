@@ -15,11 +15,15 @@
                     </div>
                 </div>
                 <div class="self-center w-16 text-sm text-center align-middle">
-                    @if ($match->score1 || $match->score2)
+
                         <span class="bg-gray-200 mx-2 font-bold font-bebas text-gray-800 text-md me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                            {{ $match->score1 }}:{{ $match->score2 }}
+                            @if ($match->score1 || $match->score2)
+                                {{ $match->score1 }}:{{ $match->score2 }}
+                            @else
+                                VS
+                            @endif
                         </span>
-                    @endif
+
 
                 </div>
                 <div class="flex self-center w-2/6 text-sm align-middle ">
