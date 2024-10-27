@@ -80,7 +80,7 @@ class HomeController extends Controller
     }
 
     public function post(Request $request,$slug){
-        $post = Post::where('slug',$slug)->published()->first();
+        $post = Post::where('slug',$slug)->published()->firstorfail();
         $cat_id = AppHelper::getNewsCatId();
         $category = $post->categories->first();
         $parent = $post;
@@ -286,5 +286,34 @@ class HomeController extends Controller
         $tags = Tag::get();
 
         return view('frontend.leagues', compact('matches','league','parent','latest','popular','trendings','tags'));
+    }
+
+    public function search(Request $request,$q=null){
+        $posts = Post::published()->where(function($query){
+            $query->where('title','like','%'.$_GET['q'].'%')
+                ->orWhere('sub_title','like','%'.$_GET['q'].'%')
+                ->orWhere('body','like','%'.$_GET['q'].'%');
+        })->where('slug','!=','about-us')->orderBy('id', 'desc')->get();
+
+        $matches = SportMatch::where('status', Status::Active->value)->where(function($query){
+            $query->where('title','like','%'.$_GET['q'].'%');
+        })->get();
+
+        $cat_id = AppHelper::getNewsCatId();
+        $parent = AppHelper::getSportNewsCategory();
+        $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+            if($cat_id)
+                return $query->where('category_id', '=', $cat_id);
+            return $query;
+        })->limit(4)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+            if($cat_id)
+                return $query->where('category_id', '=', $cat_id);
+            return $query;
+        })->limit(3)->orderBy('id', 'desc')->get();
+        $trendings = AppHelper::getTrendingNews(5);
+        $tags = Tag::get();
+
+        return view('frontend.search', compact('posts','matches','parent','latest','popular','trendings','tags'));
     }
 }
