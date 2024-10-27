@@ -38,16 +38,12 @@
                         <img class="object-cover w-full mx-auto my-3 mt-5 mb-5 rounded-lg" src="{{ asset('storage/'.$post->cover_photo_path) }}" alt="{{ $post->title }}">
                     </div>
                 @endif
-                <div class="mt-3">
+                <div class="mt-3 dark:text-white">
                     {!! $post->body !!}
                 </div>
 
             </div>
             <div class="latest-news">
-                <div class="mb-5">
-                    <div id="datepicker-inline" autoSelectToday=1 inline-datepicker data-date="{{ date("m/d/Y") }}"></div>
-                </div>
-
                 <x-widgets.tags-list :tags="$tags"/>
                 <div class="mt-5 mb-5 ads-1">
                     <img class="w-full rounded" src="{{ asset('storage/'.$ads1) }}" alt="ads-1">
