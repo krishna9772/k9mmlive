@@ -370,4 +370,40 @@ class HomeController extends Controller
         AppHelper::setupSEO();
         return redirect('/');
     }
+
+
+    public function sportLiveMatch(Request $request,$slug){
+
+        $match = SportMatch::where('slug',$slug)->firstorfail();
+        $cat_id = AppHelper::getNewsCatId();        
+        if(!$match){
+            abort(404);
+        }
+
+        $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+            if($cat_id)
+                return $query->where('category_id', '=', $cat_id);
+            return $query;
+        })->where('language',Session::get('lang'))->limit(4)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+            if($cat_id)
+                return $query->where('category_id', '=', $cat_id);
+            return $query;
+        })->where('language',Session::get('lang'))->limit(3)->orderBy('id', 'desc')->get();
+
+        $trendings = AppHelper::getTrendingNews(5);
+
+        $tags = Tag::get();
+
+        AppHelper::setupSEO([
+            'title' => $match->title,
+            'description' => Str::limit(strip_tags($match->description), 255),                        
+            'url' => url()->current(),            
+        ]);
+        
+        $shareButton = ShareSnippet::query()->active()->first();        
+        //$post->seoDetail->keywords ?? [];
+
+        return view('frontend.sport-live-match', compact('match','shareButton','latest','popular','trendings','tags'));
+    }
 }

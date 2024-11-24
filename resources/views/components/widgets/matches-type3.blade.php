@@ -6,7 +6,7 @@
     </div>
     <div class="mt-3 dark:text-white">
         @foreach ($matches as $match )
-            <a target="{{$match->live_link? '_blank':'_self'}}" href="{{ $match->live_link ?:'#' }}" class="flex w-full px-5 py-2 mb-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <a target="{{$match->live_link? '_blank':'_self'}}" href="{{ $match->live_link ?:route('frontend.sport.live-match',[$match->slug]) }}" class="flex w-full px-5 py-2 mb-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="self-center align-middle w-14" style="font-size: 9px">
                     {{ date('H:iA d/m/Y',strtotime($match->date_time)) }}
                 </div>

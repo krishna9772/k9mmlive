@@ -25,6 +25,7 @@ class SportMatch extends Model
         'date_time',
         'sort',
         'description',
+        'live_embed',
         'score1',
         'score2',
     ];

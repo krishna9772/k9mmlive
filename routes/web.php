@@ -23,6 +23,7 @@ Route::get('/about-us', [HomeController ::class, 'aboutUs'])->name('frontend.abo
 Route::get('/tag/{slug}', [HomeController ::class, 'tags'])->name('frontend.tags.show');
 Route::get('/category/{slug}', [HomeController ::class, 'category'])->name('frontend.categories.show');
 Route::post('/comment/{post:slug}/store', [HomeController::class, 'comment'])->middleware('auth')->name('comment.store');
+Route::get('/live-matches/{slug}', [HomeController ::class, 'sportLiveMatch'])->name('frontend.sport.live-match');
 Route::get('/{slug}', [HomeController ::class, 'post'])->name('frontend.posts.show');
 
 Route::middleware([

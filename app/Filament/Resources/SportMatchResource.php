@@ -11,10 +11,12 @@ use App\Models\SportSeason;
 use App\Models\SportStage;
 use App\Models\SportTeam;
 use App\Models\SportType;
+use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -103,7 +105,8 @@ class SportMatchResource extends Resource
                     ->integer(),
                 Forms\Components\TextInput::make('score2')
                     ->integer(),
-                RichEditor::make('description')
+                Textarea::make('live_embed')->columnSpan(2),
+                RichEditor::make('description')                    
                     ->columnSpanFull(),
             ])->columns(4);
     }

@@ -7,7 +7,7 @@
 
     <div class="mt-3 dark:text-white">
         @foreach ($matches as $match )
-            <a target="{{$match->live_link? '_blank':'_self'}}" href="{{ $match->live_link ?:'#' }}" class="flex w-full px-1 py-2 mb-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <a target="{{$match->live_link? '_blank':'_self'}}" href="{{ $match->live_link ?: route('frontend.sport.live-match',[$match->slug])  }}" class="flex w-full px-1 py-2 mb-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="flex self-center w-2/6 text-sm align-middle font-bebas ">
                     <img class="object-contain w-8 h-8 mr-3" src="{{ asset('storage/'.$match->sportTeam1->image) }}" alt="{{ $match->sportTeam1->name }}">
                     <div class="self-center text-xs align-middle">
