@@ -12,13 +12,13 @@ Route::get('/language', function () {
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::post('/logout', [HomeController ::class, 'logout'])->name('logout');
+    Route::get('/live-match', [HomeController ::class, 'liveMatch'])->name('frontend.live-match');
+    Route::get('/live-schedule', [HomeController ::class, 'liveSchedule'])->name('frontend.live-schedule');
 });
 
 
 Route::get('/search', [HomeController ::class, 'search'])->name('frontend.search');
 Route::get('/leagues/{slug}', [HomeController ::class, 'leagues'])->name('frontend.leagues.show');
-Route::get('/live-match', [HomeController ::class, 'liveMatch'])->name('frontend.live-match');
-Route::get('/live-schedule', [HomeController ::class, 'liveSchedule'])->name('frontend.live-schedule');
 Route::get('/about-us', [HomeController ::class, 'aboutUs'])->name('frontend.aboutus');
 Route::get('/tag/{slug}', [HomeController ::class, 'tags'])->name('frontend.tags.show');
 Route::get('/category/{slug}', [HomeController ::class, 'category'])->name('frontend.categories.show');
