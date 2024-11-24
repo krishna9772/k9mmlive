@@ -13,14 +13,14 @@
                 <div class="flex self-center text-sm align-middle grow ">
                     <div class="grid self-center grid-cols-12 gap-1 text-xs align-middle grow font-bebas">
                         <div class="flex col-span-4">
-                            <img class="object-contain w-8 h-8 mr-3" src="{{ asset('storage/'.$match->sportTeam1->image) }}" alt="{{ $match->sportTeam1->name }}">
+                            <img class="object-contain w-8 h-8 mr-3" src="{{ asset('storage/'.$match->sportTeam1?->image) }}" alt="{{ $match->sportTeam1->name }}">
                             <div class="self-center">
                                 {{ $match->sportTeam1->name }}
                             </div>
                         </div>
                         <div class="self-center col-span-4 text-xl text-center">VS</div>
                         <div class="flex col-span-4">
-                            <img class="object-contain w-8 h-8 mr-3" src="{{ asset('storage/'.$match->sportTeam2->image) }}" alt="{{ $match->sportTeam1->name }}">
+                            <img class="object-contain w-8 h-8 mr-3" src="{{ asset('storage/'.$match->sportTeam2?->image) }}" alt="{{ $match->sportTeam1->name }}">
                             <div class="self-center">
                                 {{ $match->sportTeam2->name }}
                             </div>
@@ -29,8 +29,8 @@
                     </div>
                 </div>
                 <div class="self-center hidden ml-auto text-xs align-middle sm:w-40 sm:block">
-                    <div>{{ $match->sportLeague->name }}</div>
-                    <div class="text-md">{{ $match->sportStage->name }}</div>
+                    <div>{{ $match->sportLeague?->name }}</div>
+                    <div class="text-md">{{ $match->sportStage?->name }}</div>
                 </div>
                 <div class="self-center w-40 ml-auto text-xs align-middle sm:w-10">
                     <x-icon name="heroicon-o-chevron-right" class="ml-auto"  width="20" height="20" />
