@@ -36,6 +36,7 @@ class User extends Authenticatable implements FilamentUser
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
     ];
 
@@ -77,5 +78,12 @@ class User extends Authenticatable implements FilamentUser
     {
         // your conditional logic here
         return true;
+    }
+
+    public function canAccessFilament(): bool
+    {        
+        $roles = $this->roles->pluck("name");
+        // Only allow 'admin' role to access Filament
+        return in_array("super_admin", $roles);
     }
 }

@@ -21,10 +21,10 @@ class SetLanguage
             //Cookie::make('lang',$lang);
         } else {
             // Use session-stored language or default to 'en'
+            $lang = Session::put('lang', 'en');
             $lang = Session::get('lang', 'en');
             //$lang = Cookie::get('lang', 'en');
         }
-
         // Set application locale
         App::setLocale($lang);
 

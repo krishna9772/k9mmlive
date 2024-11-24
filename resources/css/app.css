@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.accordion-heading:has(+ .accordion-body:not(.hidden)) button{
-    border-bottom-left-radius:0 ;
-    border-bottom-right-radius:0 ;
+.accordion-heading:has(+ .accordion-body:not(.hidden)) button {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     border-bottom: 0;
 }
 
@@ -13,7 +13,7 @@
     --secondary-color: #000;
 }
 
-html[lang="my"] *{
+html[lang="my"] * {
     /*font-family: 'Noto Sans Myanmar', sans-serif !important;*/
 
     nav {
@@ -22,19 +22,21 @@ html[lang="my"] *{
         }
     }
 
-    .text-xl{
+    .text-xl {
         font-size: 14px;
     }
-    .text-6xl{
+
+    .text-6xl {
         font-size: 30px;
     }
-    .text-2xl{
+
+    .text-2xl {
         font-size: 16px;
     }
-    .banner{
-        h1{
+
+    .banner {
+        h1 {
             margin-bottom: 20px;
         }
     }
 }
-

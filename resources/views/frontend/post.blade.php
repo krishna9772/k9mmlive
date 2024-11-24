@@ -41,7 +41,44 @@
                 <div class="mt-3 dark:text-white">
                     {!! $post->body !!}
                 </div>
+                <div class="mt-5">
+                    {!! $shareButton?->html_code !!}                
+                </div>
 
+                <div class="mt-5">
+                    @if($post->comments->count())
+                        <div class="border-t-2 py-10">
+                            <div class="mb-4">
+                                <h3 class="mb-2 text-2xl font-semibold">Comments</h3>
+                            </div>
+                            <div class="flex flex-col gap-y-6 divide-y">
+                                @foreach($post->comments as $comment)
+                                    @if($comment->user)
+                                    <article class="pt-4 text-base">
+                                        <div class="mb-4 flex items-center gap-4">
+                                            <img class="h-14 w-14 overflow-hidden rounded-full border-4 border-white bg-zinc-300 object-cover text-[0] ring-1 ring-slate-300" src="{{ asset($comment->user?->avatar) }}" alt="avatar">
+                                            <div>
+
+                                                <span class="block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap font-semibold">
+                                                    {{ $comment->user?->{config('filamentblog.user.columns.name')} }}
+                                                </span>
+                                                <span class="block whitespace-nowrap text-sm font-medium text-zinc-600">
+                                                    {{ $comment->created_at->diffForHumans() }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-500">
+                                            {{ $comment->comment }}
+                                        </p>
+                                    </article>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                        @endif
+                        <x-widgets.comment :post="$post" />
+                </div>
+                
             </div>
             <div class="latest-news">
                 <x-widgets.tags-list :tags="$tags"/>
@@ -53,5 +90,6 @@
 
         </div>
     </div>
+    {!! $shareButton?->script_code !!}
 </x-app-layout>
 

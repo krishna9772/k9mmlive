@@ -4,8 +4,7 @@ $params = request()->all();
 if(isset($params['lang'])) unset($params['lang']);
 @endphp
 <div id="top-bar" class="items-center justify-between px-6 py-2 text-sm bg-neutral-100 dark:bg-gray-900">
-    <div class="flex justify-end px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-
+    <div class="flex justify-end px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">        
         <div class="flex items-center space-x-4">
 
             <button id="theme-toggle" type="button" class="p-1 text-sm text-gray-500 rounded-lg dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700 ">
@@ -21,6 +20,29 @@ if(isset($params['lang'])) unset($params['lang']);
                 <x-nav-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=en':'?lang=en') }}" :active="app()->getLocale()==='en'" class="font-bold">
                     {{ __('ENG') }}
                 </x-nav-link>
+                <span class="text-gray-500 dark:text-gray-400">|</span>
+                <x-nav-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=zh':'?lang=zh') }}" :active="app()->getLocale()==='zh'" class="font-bold">
+                    {{ __('CH') }}
+                </x-nav-link>
+            </div>
+            <div>
+                @if(auth()->user())
+                    <x-nav-link href="{{ route('logout') }}" class="font-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <x-icon name="fas-user" class='mr-1' width="13" height="13" />
+                        {{ __('Logout') }} ({{ auth()->user()->name }})
+                    </x-nav-link>
+                    <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                        @csrf
+                    </form>
+                @else
+                    <x-nav-link href="{{ route('login') }}" class="font-bold">
+                        {{ __('Login') }}
+                    </x-nav-link>
+                    <span class="text-gray-500 dark:text-gray-400">|</span>
+                    <x-nav-link href="{{ route('register') }}" class="font-bold">
+                        {{ __('Register') }}
+                    </x-nav-link>
+                @endif
             </div>
             {{--
             <div class="flex items-center pl-5 space-x-4">

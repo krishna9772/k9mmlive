@@ -13,7 +13,7 @@
 <div id="footer" class="items-center justify-between px-6 py-5 text-sm text-white dark:text-gray-400 bg-dark-color dark:bg-gray-800">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-center px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            © {{ date("Y") }} <a href="{{ url('/') }}">K9Win</a>. All Rights Reserved.
+            © {{ date("Y") }} <a href="{{ url('/') }}">K9Win</a>. {{ __("All Rights Reserved.") }}            
         </div>
     </div>
 </div>

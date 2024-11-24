@@ -9,6 +9,9 @@ use App\Settings\GeneralSettings;
 use Firefly\FilamentBlog\Models\Category;
 use Firefly\FilamentBlog\Models\Post;
 use Illuminate\Support\Facades\Session;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\TwitterCard;
 
 class AppHelper
 {
@@ -77,7 +80,7 @@ class AppHelper
      public static function getTrendingNews($limit=1){
         return Post::whereHas('tags',function($query){
             $query->where('slug','trending-now');
-        })->where('status', 'published')->orderBy('id', 'desc')->limit($limit)->get();
+        })->where('status', 'published')->where('language',Session::get('lang'))->orderBy('id', 'desc')->limit($limit)->get();
      }
 
      public static function settings($name)
@@ -93,5 +96,37 @@ class AppHelper
 
      public static function isMM(){
         return Session::get('lang') == 'my';
+     }
+
+     public static function languages(){
+        return [
+            'en' => 'English',
+            'my' => 'Myanmar',
+            'zh' => 'Chinese',
+        ];
+     }
+     public static function defaultLanguage(){
+      return 'en';
+     }
+
+     public static function setupSEO($data=[]){
+      SEOMeta::setTitle($data['title'] ?? config('seotools.meta.defaults.title'));
+      SEOMeta::setDescription($data['description'] ?? config('seotools.meta.defaults.description'));
+      SEOMeta::setCanonical($data['canonical'] ?? url()->current());
+      SEOMeta::setKeywords($data['keywords'] ?? config('seotools.meta.defaults.keywords'));
+
+      OpenGraph::setTitle($data['title'] ?? config('seotools.meta.defaults.title'));
+      OpenGraph::setDescription($data['description'] ?? config('seotools.meta.defaults.description'));
+      OpenGraph::setUrl($data['url'] ?? url()->current());
+      OpenGraph::addImage($data['image'] ?? config('seotools.meta.defaults.image'));
+      
+      TwitterCard::setSite("@k9mmlive");
+      TwitterCard::setTitle($data['title'] ?? config('seotools.meta.defaults.title'));
+      TwitterCard::setDescription($data['description'] ?? config('seotools.meta.defaults.description'));
+      TwitterCard::setImage($data['image'] ?? config('seotools.meta.defaults.image'));
+      TwitterCard::setUrl($data['url'] ?? url()->current());
+      TwitterCard::setType('summary_large_image');   
+      TwitterCard::addValue("creator","@k9winsportsmedia");        
+      
      }
 }

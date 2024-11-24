@@ -11,13 +11,20 @@ use App\Models\SportLeague;
 use App\Models\SportMatch;
 use App\Models\SportTeam;
 use App\Models\SportType;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\TwitterCard;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Firefly\FilamentBlog\Models\Category;
 use Firefly\FilamentBlog\Models\Post;
+use Firefly\FilamentBlog\Models\ShareSnippet;
 use Firefly\FilamentBlog\Models\Tag;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -36,13 +43,13 @@ class HomeController extends Controller
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(4)->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->limit(4)->orderBy('id', 'desc')->get();
 
         $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(3)->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->limit(3)->orderBy('id', 'desc')->get();
 
         $matches = SportMatch::where('status', Status::Active->value);
         if($date){
@@ -50,7 +57,7 @@ class HomeController extends Controller
         }
         $matches = $matches->get();
         $socials = SocialLink::where('status', Status::Active->value)->orderBy('sort')->get();
-
+        AppHelper::setupSEO();
         return view('frontend.home', compact('date','sliders','types','latest','popular','matches','socials'));
     }
 
@@ -59,23 +66,23 @@ class HomeController extends Controller
         $cat_id = AppHelper::getNewsCatId();
         $posts = Post::whereHas('categories', function ($query) use ($parent) {
             return $query->where('category_id', '=', $parent->id);
-        })->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',10));
+        })->where('language',Session::get('lang'))->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',10));
 
         $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(4)->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->limit(4)->orderBy('id', 'desc')->get();
         $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(3)->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->limit(3)->orderBy('id', 'desc')->get();
 
         $trendings = AppHelper::getTrendingNews(5);
 
         $tags = Tag::get();
-
+        AppHelper::setupSEO();
         return view('frontend.post-list', compact('parent','posts','latest','popular','trendings','tags'));
     }
 
@@ -92,12 +99,12 @@ class HomeController extends Controller
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(4)->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->limit(4)->orderBy('id', 'desc')->get();
         $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(3)->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->limit(3)->orderBy('id', 'desc')->get();
 
         $trendings = AppHelper::getTrendingNews(5);
 
@@ -105,7 +112,20 @@ class HomeController extends Controller
 
         $is_video = $category->slug=='videos';
 
-        return view('frontend.post', compact('category','parent','post','latest','popular','trendings','tags','is_video'));
+        AppHelper::setupSEO([
+            'title' => $post->seoDetail?->title,
+            'description' => $post->seoDetail?->description,
+            'keywords' => $post->seoDetail->keywords ?? [],
+            'image' => $post->featurePhoto,
+            'url' => url()->current(),            
+        ]);
+        
+        $shareButton = ShareSnippet::query()->active()->first();
+        $post->load(['user', 'categories', 'tags', 'comments' => fn ($query) => $query->approved(), 'comments.user']);
+
+        //$post->seoDetail->keywords ?? [];
+
+        return view('frontend.post', compact('shareButton','category','parent','post','latest','popular','trendings','tags','is_video'));
     }
 
     public function tags(Request $request,$slug){
@@ -123,18 +143,20 @@ class HomeController extends Controller
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(4)->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->limit(4)->orderBy('id', 'desc')->get();
         $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(3)->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->limit(3)->orderBy('id', 'desc')->get();
 
         $trendings = AppHelper::getTrendingNews(5);
 
         $tags = Tag::get();
 
         $is_video = $parent->slug=='videos';
+
+        AppHelper::setupSEO();
 
         return view('frontend.post-list', compact('parent','posts','latest','popular','trendings','tags','is_video'));
     }
@@ -147,14 +169,14 @@ class HomeController extends Controller
         $cat_id = AppHelper::getNewsCatId();
         $posts = Post::whereHas('categories', function ($query) use ($parent) {
             return $query->where('category_id', '=', $parent->id);
-        })->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',10));
+        })->where('language',Session::get('lang'))->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',10));
 
-        $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+        $latest = Post::published()->where('language',Session::get('lang'))->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
         })->limit(4)->orderBy('id', 'desc')->get();
-        $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+        $popular = Post::published()->where('language',Session::get('lang'))->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
@@ -164,7 +186,7 @@ class HomeController extends Controller
 
         $tags = Tag::get();
         $is_video = $parent->slug=='videos';
-
+        AppHelper::setupSEO();
         return view('frontend.post-list', compact('parent','posts','latest','popular','trendings','tags','is_video'));
     }
 
@@ -189,12 +211,12 @@ class HomeController extends Controller
 
         $parent = AppHelper::getSportNewsCategory();
 
-        $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+        $latest = Post::published()->where('language',Session::get('lang'))->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
         })->limit(4)->orderBy('id', 'desc')->get();
-        $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+        $popular = Post::published()->where('language',Session::get('lang'))->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
@@ -202,7 +224,7 @@ class HomeController extends Controller
 
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
-
+        AppHelper::setupSEO();
         return view('frontend.live-schedule', compact('footballs','boxings','esports','date','parent','latest','popular','trendings','tags'));
     }
 
@@ -212,12 +234,12 @@ class HomeController extends Controller
         $cat_id = AppHelper::getNewsCatId();
         $parent = AppHelper::getSportNewsCategory();
 
-        $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+        $latest = Post::published()->where('language',Session::get('lang'))->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
         })->limit(4)->orderBy('id', 'desc')->get();
-        $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+        $popular = Post::published()->where('language',Session::get('lang'))->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
@@ -225,7 +247,7 @@ class HomeController extends Controller
 
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
-
+        AppHelper::setupSEO();
         return view('frontend.live-match', compact('matches','parent','latest','popular','trendings','tags'));
     }
 
@@ -239,16 +261,16 @@ class HomeController extends Controller
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(4)->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->limit(4)->orderBy('id', 'desc')->get();
         $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(3)->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->limit(3)->orderBy('id', 'desc')->get();
 
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
-
+        AppHelper::setupSEO();
         return view('frontend.about-us', compact('post','parent','latest','popular','trendings','tags'));
     }
 
@@ -276,7 +298,7 @@ class HomeController extends Controller
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(4)->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->limit(4)->orderBy('id', 'desc')->get();
         $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
@@ -284,7 +306,7 @@ class HomeController extends Controller
         })->limit(3)->orderBy('id', 'desc')->get();
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
-
+        AppHelper::setupSEO();
         return view('frontend.leagues', compact('matches','league','parent','latest','popular','trendings','tags'));
     }
 
@@ -293,7 +315,7 @@ class HomeController extends Controller
             $query->where('title','like','%'.$_GET['q'].'%')
                 ->orWhere('sub_title','like','%'.$_GET['q'].'%')
                 ->orWhere('body','like','%'.$_GET['q'].'%');
-        })->where('slug','!=','about-us')->orderBy('id', 'desc')->get();
+        })->where('language',Session::get('lang'))->where('slug','!=','about-us')->orderBy('id', 'desc')->get();
 
         $matches = SportMatch::where('status', Status::Active->value)->where(function($query){
             $query->where('title','like','%'.$_GET['q'].'%');
@@ -305,15 +327,47 @@ class HomeController extends Controller
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
-        })->limit(4)->orderBy('id', 'desc')->get();
-        $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+        })->where('language',Session::get('lang'))->limit(4)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->where('language',Session::get('lang'))->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
                 return $query->where('category_id', '=', $cat_id);
             return $query;
         })->limit(3)->orderBy('id', 'desc')->get();
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
-
+        AppHelper::setupSEO();
         return view('frontend.search', compact('posts','matches','parent','latest','popular','trendings','tags'));
+    }
+
+    public function comment(Request $request, Post $post)
+    {
+        $request->validate([
+            'comment' => 'required|min:3|max:500',
+        ]);
+
+        $post->comments()->create([
+            'comment' => $request->comment,
+            'user_id' => $request->user()->id,
+            'approved' => false,
+        ]);
+        AppHelper::setupSEO();
+        return redirect()
+            ->route('frontend.posts.show', $post->slug)
+            ->with('success', 'Comment submitted for approval.');
+    }
+
+    /**
+     * Log the user out of the application.
+     */
+    public function logout(Request $request): RedirectResponse
+    {
+        
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+        AppHelper::setupSEO();
+        return redirect('/');
     }
 }
