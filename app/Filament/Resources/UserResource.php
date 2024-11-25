@@ -59,11 +59,11 @@ class UserResource extends Resource
         $rows = [
             TextInput::make('name')
                 ->required()
-                ->label(trans('filament-users::user.resource.name'))->unique(),
+                ->label(trans('filament-users::user.resource.name'))->unique('users','name'),
             TextInput::make('email')
                 ->email()
                 ->required()
-                ->label(trans('filament-users::user.resource.email'))->unique(),
+                ->label(trans('filament-users::user.resource.email'))->unique('users','email'),
             TextInput::make('password')
                 ->label(trans('filament-users::user.resource.password'))
                 ->password()
