@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\Model;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
+use Illuminate\Validation\Rule;
 
 class UserResource extends Resource
 {
@@ -59,11 +60,13 @@ class UserResource extends Resource
         $rows = [
             TextInput::make('name')
                 ->required()
-                ->label(trans('filament-users::user.resource.name'))->unique('users','name'),
+                ->rule(fn ($record) => Rule::unique('users', 'name')->ignore($record?->id))
+                ->label(trans('filament-users::user.resource.name')),
             TextInput::make('email')
                 ->email()
                 ->required()
-                ->label(trans('filament-users::user.resource.email'))->unique('users','email'),
+                ->rule(fn ($record) => Rule::unique('users', 'email')->ignore($record?->id))
+                ->label(trans('filament-users::user.resource.email')),
             TextInput::make('password')
                 ->label(trans('filament-users::user.resource.password'))
                 ->password()
