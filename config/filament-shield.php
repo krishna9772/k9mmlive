@@ -24,12 +24,14 @@ return [
         'intercept_gate' => 'before', // after
     ],
     'panel_user' => [
-        'enabled' => false,
+        'enabled' => true,
         'name' => 'panel_user',
     ],
     'match_schedule' => [
         'enabled' => true,
         'name' => 'match_schedule',
+        //'define_via_gate' => false,
+        //'intercept_gate' => 'before', // after
     ],
 
     'permission_prefixes' => [

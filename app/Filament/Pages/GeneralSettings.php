@@ -37,4 +37,14 @@ class GeneralSettings extends SettingsPage
                 FileUpload::make('ads_image3'),
             ])->columns(3);
     }
+
+    public static function canAccess(): bool
+    {
+        $user = auth()->user();
+        if($user){
+            $roles = $user->roles->pluck("name")->toArray();   
+            return in_array("super_admin", $roles);     
+        }        
+        return false;
+    }
 }

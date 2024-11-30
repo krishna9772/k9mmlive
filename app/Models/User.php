@@ -15,6 +15,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use SolutionForest\FilamentAccessManagement\Concerns\FilamentUserHelpers;
 use Spatie\Permission\Traits\HasRoles;
+use Filament\Panel;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -82,8 +83,14 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessFilament(): bool
     {        
-        $roles = $this->roles->pluck("name");
+        $roles = $this->roles->pluck("name");        
         // Only allow 'admin' role to access Filament
-        return in_array("super_admin", $roles);
+        return in_array("super_admin", $roles) || in_array("match_schedule", $roles);
+    }
+    public function canAccessPanel(Panel $panel): bool
+    {        
+        $roles = $this->roles->pluck("name")->toArray();                
+        // Only allow 'admin' role to access Filament
+        return in_array("super_admin", $roles) || in_array("match_schedule", $roles);
     }
 }
