@@ -35,7 +35,7 @@ class AppHelper
 
      public static function boxingMatches($date=null,$limit=null)
      {
-        return self::footBallMatches($date,$limit);
+        //return self::footBallMatches($date,$limit);
         $type = SportType::where('status', Status::Active->value)->whereIn('name', ['boxing',"Boxing"])->first();
         $query = SportMatch::where('status', Status::Active->value)->where('sport_type_id', $type->id??0);
         if($limit){
@@ -49,7 +49,7 @@ class AppHelper
 
      public static function esportMatches($date=null,$limit=null)
      {
-        return self::footBallMatches($date,$limit);
+        //return self::footBallMatches($date,$limit);
 
         $type = SportType::where('status', Status::Active->value)->whereIn('name', ['esport',"Esport"])->first();
         $query = SportMatch::where('status', Status::Active->value)->where('sport_type_id', $type->id??0);

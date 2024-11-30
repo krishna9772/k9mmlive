@@ -230,7 +230,7 @@ class HomeController extends Controller
 
     public function liveMatch(Request $request){
 
-        $matches = SportMatch::where('status', Status::Active->value)->orderBy('date_time','desc')->paginate(env('PAGE_SIZE',10));
+        $matches = SportMatch::where('status', Status::Active->value)->where('live_now',1)->orderBy('date_time','desc')->paginate(env('PAGE_SIZE',10));
         $cat_id = AppHelper::getNewsCatId();
         $parent = AppHelper::getSportNewsCategory();
 
