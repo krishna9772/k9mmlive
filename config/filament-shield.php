@@ -23,10 +23,13 @@ return [
         'define_via_gate' => false,
         'intercept_gate' => 'before', // after
     ],
-
     'panel_user' => [
         'enabled' => false,
         'name' => 'panel_user',
+    ],
+    'match_schedule' => [
+        'enabled' => true,
+        'name' => 'match_schedule',
     ],
 
     'permission_prefixes' => [
