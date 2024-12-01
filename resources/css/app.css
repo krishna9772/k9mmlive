@@ -66,3 +66,7 @@ html[lang="my"] * {
     left: calc(50% - 45px);
     top: calc(50% - 22px);
 }
+
+.w-457 {
+    width: 457px;
+}
