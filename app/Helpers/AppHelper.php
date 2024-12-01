@@ -110,23 +110,32 @@ class AppHelper
      }
 
      public static function setupSEO($data=[]){
-      SEOMeta::setTitle($data['title'] ?? config('seotools.meta.defaults.title'));
-      SEOMeta::setDescription($data['description'] ?? config('seotools.meta.defaults.description'));
-      SEOMeta::setCanonical($data['canonical'] ?? url()->current());
-      SEOMeta::setKeywords($data['keywords'] ?? config('seotools.meta.defaults.keywords'));
+      SEOMeta::setTitle(self::getVal($data,'title',config('seotools.meta.defaults.title')));
+      SEOMeta::setDescription(self::getVal($data,'description',config('seotools.meta.defaults.description')));
+      SEOMeta::setCanonical(self::getVal($data,'canonical',url()->current()));
+      SEOMeta::setKeywords(self::getVal($data,'keywords',config('seotools.meta.defaults.keywords')));
 
-      OpenGraph::setTitle($data['title'] ?? config('seotools.meta.defaults.title'));
-      OpenGraph::setDescription($data['description'] ?? config('seotools.meta.defaults.description'));
-      OpenGraph::setUrl($data['url'] ?? url()->current());
-      OpenGraph::addImage($data['image'] ?? config('seotools.meta.defaults.image'));
+      
+      OpenGraph::setTitle(self::getVal($data,'title',config('seotools.meta.defaults.title')));
+      OpenGraph::setDescription(self::getVal($data,'description',config('seotools.meta.defaults.description')));
+
+      OpenGraph::setUrl(self::getVal($data,'url',url()->current()));
+      OpenGraph::addImage(self::getVal($data,'image',config('seotools.meta.defaults.image')));
       
       TwitterCard::setSite("@k9mmlive");
-      TwitterCard::setTitle($data['title'] ?? config('seotools.meta.defaults.title'));
-      TwitterCard::setDescription($data['description'] ?? config('seotools.meta.defaults.description'));
-      TwitterCard::setImage($data['image'] ?? config('seotools.meta.defaults.image'));
-      TwitterCard::setUrl($data['url'] ?? url()->current());
+      TwitterCard::setTitle(self::getVal($data,'title',config('seotools.meta.defaults.title')));
+      TwitterCard::setDescription(self::getVal($data,'description',config('seotools.meta.defaults.description')));
+      TwitterCard::setImage(self::getVal($data,'image',config('seotools.meta.defaults.image')));
+      TwitterCard::setUrl(self::getVal($data,'url',url()->current()));
       TwitterCard::setType('summary_large_image');   
       TwitterCard::addValue("creator","@k9winsportsmedia");        
       
-     }
+   }
+
+   public static function getVal($data,$attr,$default=null){
+      if(isset($data[$attr]) && !empty($data[$attr])){
+         return $data[$attr];
+      }
+      return $default;
+   }
 }
