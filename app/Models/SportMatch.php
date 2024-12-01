@@ -84,4 +84,11 @@ class SportMatch extends Model
         return asset('storage/'.$this->image);
     }
 
+    public function isIframe(){
+        return strpos($this->live_embed , 'iframe') !== false;
+    }
+
+    public function isM3u8(){
+        return strpos($this->live_embed , '.m3u8') !== false;
+    }
 }
