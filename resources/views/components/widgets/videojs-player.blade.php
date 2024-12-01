@@ -9,12 +9,19 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function () {        
-        var ply = videojs("video", {
+        var player = videojs("video", {
             autoplay: true,
             muted: true,
             controls: true
         });
-        ply.play();        
+        //ply.play();        
+        // Unmute the video after 1 second
+        player.ready(function () {
+            setTimeout(function () {
+                player.muted(false); // Unmute
+                //player.play();
+            }, 1000);
+        });
     });
 </script>
 
