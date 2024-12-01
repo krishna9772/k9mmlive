@@ -15,6 +15,7 @@ class SportMatch extends Model
         'slug',
         'live_link',
         'live_now',
+        'image',
         'sport_team1_id',
         'sport_team2_id',
         'sport_type_id',
@@ -28,6 +29,10 @@ class SportMatch extends Model
         'live_embed',
         'score1',
         'score2',
+    ];
+
+    protected $appends = [
+        'image_path',
     ];
 
     /**
@@ -74,5 +79,9 @@ class SportMatch extends Model
         return $this->belongsTo(SportLeague::class);
     }
 
+    public function getImagePathAttribute()
+    {
+        return asset('storage/'.$this->image);
+    }
 
 }

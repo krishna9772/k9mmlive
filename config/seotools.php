@@ -2,6 +2,11 @@
 /**
  * @see https://github.com/artesaos/seotools
  */
+if(isset($_SERVER['HTTP_HOST'])){
+    $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") 
+    . "://{$_SERVER['HTTP_HOST']}" . dirname($_SERVER['SCRIPT_NAME']);    
+}else $baseUrl = env('APP_URL');
+
 
 return [
     'meta' => [
@@ -16,7 +21,7 @@ return [
             'keywords'     => [],
             'canonical'    => false, // Set to null or 'full' to use Url::full(), set to 'current' to use Url::current(), set false to total remove
             'robots'       => false, // Set to 'all', 'none' or any combination of index/noindex and follow/nofollow
-            'image'        => url('img/logo.png'), // Set false to total remove 
+            'image'        => $baseUrl.'/img/logo.png', // Set false to total remove 
         ],
         /*
          * Webmaster tags are always added.

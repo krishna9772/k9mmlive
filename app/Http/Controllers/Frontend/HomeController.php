@@ -397,7 +397,8 @@ class HomeController extends Controller
 
         AppHelper::setupSEO([
             'title' => $match->title,
-            'description' => Str::limit(strip_tags($match->description), 255),                        
+            'description' => Str::limit(strip_tags($match->description), 255),   
+            'image' => asset($match->image_path),                   
             'url' => url()->current(),            
         ]);
         

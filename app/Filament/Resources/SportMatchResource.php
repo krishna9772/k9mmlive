@@ -106,6 +106,8 @@ class SportMatchResource extends Resource
                 Forms\Components\TextInput::make('score2')
                     ->integer(),
                 Textarea::make('live_embed')->columnSpan(2),
+                Forms\Components\FileUpload::make('image')
+                    ->image()->columnSpanFull(),
                 RichEditor::make('description')                    
                     ->columnSpanFull(),
             ])->columns(4);
