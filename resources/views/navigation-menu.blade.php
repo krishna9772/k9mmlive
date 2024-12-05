@@ -1,3 +1,7 @@
+@php
+    $lang = app()->getLocale();
+    $_class = $lang == "my"? "space-x-2":"space-x-8";
+@endphp
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 dark:bg-gray-800 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -11,12 +15,15 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 font-bebas sm:-my-px sm:ms-10 sm:flex grow">
+                <div class="hidden {{$_class}} font-bebas sm:-my-px sm:ms-10 sm:flex grow">
                     <x-nav-link href="{{ url('/') }}" :active="request()->is('/')">
                         <span class="text-xl text-uppercase">{{ __('Home') }}</span>
                     </x-nav-link>
                     <x-nav-link href="/live-match" :active="request()->is('*live-match*')">
                         <span class="text-xl text-uppercase">{{ __('Live Match') }}</span>
+                    </x-nav-link>
+                    <x-nav-link href="/category/sport-articles" :active="request()->is('*sport-news*')">
+                        <span class="text-xl text-uppercase">{{ __('Sport Articles') }}</span>
                     </x-nav-link>
                     <x-nav-link href="/category/sport-news" :active="request()->is('*sport-news*')">
                         <span class="text-xl text-uppercase">{{ __('Sport News') }}</span>
