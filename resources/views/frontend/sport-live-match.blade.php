@@ -21,12 +21,14 @@
                     {!! $match->description !!}
                 </div>
                 @if ($match->live_embed)
-                    <div class="mt-5">  
-                        @if ($match->isIframe())
-                            {!! $match->live_embed !!}
-                        @else
-                            <x-widgets.videojs-player :match="$match" />
-                        @endif                                              
+                    <div class="mt-5">                         
+                            @if ($match->isIframe())
+                                <div class="responsive-iframe-container">
+                                    {!! $match->live_embed !!}
+                                </div>                         
+                            @else
+                                <x-widgets.videojs-player :match="$match" />
+                            @endif                                                                      
                     </div>                    
                 @endif                 
                 <div class="mt-5">
