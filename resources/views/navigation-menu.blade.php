@@ -22,7 +22,7 @@
                     <x-nav-link href="/live-match" :active="request()->is('*live-match*')">
                         <span class="text-xl text-uppercase">{{ __('Live Match') }}</span>
                     </x-nav-link>
-                    <x-nav-link href="/category/sport-articles" :active="request()->is('*sport-news*')">
+                    <x-nav-link href="/category/sport-articles" :active="request()->is('*sport-articles*')">
                         <span class="text-xl text-uppercase">{{ __('Sport Articles') }}</span>
                     </x-nav-link>
                     <x-nav-link href="/category/sport-news" :active="request()->is('*sport-news*')">
