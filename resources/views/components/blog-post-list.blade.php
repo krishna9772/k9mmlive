@@ -4,7 +4,7 @@
     <h5 class="mb-2 text-2xl tracking-tight text-gray-900 font-bebas dark:text-white">{{ __($title) }}</h5>
     @foreach ($posts as $post)
         <div class="flex p-2 mb-2 border border-gray-200 rounded-lg shadow dark:border-gray-700 post bg-alice-blue-color dark:bg-dark-alice-blue-color">
-            <img class="object-cover w-122 h-16 my-auto rounded-lg me-2" src="{{ $post->featurePhoto }}" alt="{{ $post->title }}">
+            <img class="object-cover w-20 h-20 my-auto rounded-lg me-2" src="{{ $post->featurePhoto }}" alt="{{ $post->title }}">
             <div class="title">
                 @foreach ($post->tags as $tag)
                     <span class="text-xs text-gray-500">
