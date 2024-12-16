@@ -66,7 +66,7 @@ class HomeController extends Controller
         $cat_id = AppHelper::getNewsCatId();
         $posts = Post::whereHas('categories', function ($query) use ($parent) {
             return $query->where('category_id', '=', $parent->id);
-        })->where('language',Session::get('lang'))->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',8));
+        })->where('language',Session::get('lang'))->where('status', 'published')->orderBy('id', 'desc')->paginate(8);
 
         $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
@@ -240,7 +240,7 @@ class HomeController extends Controller
 
     public function liveMatch(Request $request){
 
-        $matches = SportMatch::where('status', Status::Active->value)->where('live_now',1)->orderBy('date_time','desc')->paginate(env('PAGE_SIZE',10));
+        $matches = SportMatch::where('status', Status::Active->value)->where('live_now',1)->orderBy('date_time','desc')->paginate(8);
         $cat_id = AppHelper::getNewsCatId();
         $parent = AppHelper::getSportNewsCategory();
 
