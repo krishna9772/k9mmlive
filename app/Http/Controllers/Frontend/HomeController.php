@@ -66,7 +66,7 @@ class HomeController extends Controller
         $cat_id = AppHelper::getNewsCatId();
         $posts = Post::whereHas('categories', function ($query) use ($parent) {
             return $query->where('category_id', '=', $parent->id);
-        })->where('language',Session::get('lang'))->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',10));
+        })->where('language',Session::get('lang'))->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',8));
 
         $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
@@ -137,7 +137,7 @@ class HomeController extends Controller
 
         $posts = Post::whereHas('tags', function ($query) use ($parent) {
             return $query->where('tag_id', '=', $parent->id);
-        })->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',10));
+        })->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',8));
 
         $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
@@ -169,7 +169,7 @@ class HomeController extends Controller
         $cat_id = AppHelper::getNewsCatId();
         $posts = Post::whereHas('categories', function ($query) use ($parent) {
             return $query->where('category_id', '=', $parent->id);
-        })->where('language',Session::get('lang'))->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',10));
+        })->where('language',Session::get('lang'))->where('status', 'published')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE',8));
 
         $latest = Post::published()->where('language',Session::get('lang'))->whereHas('categories', function ($query) use ($cat_id) {
             if($cat_id)
@@ -186,7 +186,11 @@ class HomeController extends Controller
 
         $tags = Tag::get();
         $is_video = $parent->slug=='videos';
-        AppHelper::setupSEO();
+        AppHelper::setupSEO([
+            'title' => $parent->meta_title?:config('seotools.meta.defaults.title'),
+            'description' => $parent->meta_description?:config('seotools.meta.defaults.description'),
+            'keywords' => $parent->meta_keywords?:config('seotools.meta.defaults.keywords'),
+        ],false);
         return view('frontend.post-list', compact('parent','posts','latest','popular','trendings','tags','is_video'));
     }
 
@@ -224,7 +228,13 @@ class HomeController extends Controller
 
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
-        AppHelper::setupSEO();
+
+        //$ads1 = AppHelper::settings("ads_image1");
+
+        AppHelper::setupSEO([
+            'title' => AppHelper::settings("live_schedule_title") ?:config('seotools.meta.defaults.title'),
+            'description' => AppHelper::settings("live_schedule_description") ?:config('seotools.meta.defaults.description'),            
+        ],false);
         return view('frontend.live-schedule', compact('footballs','boxings','esports','date','parent','latest','popular','trendings','tags'));
     }
 
@@ -247,7 +257,10 @@ class HomeController extends Controller
 
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
-        AppHelper::setupSEO();
+        AppHelper::setupSEO([
+            'title' => AppHelper::settings("live_match_title") ?:config('seotools.meta.defaults.title'),
+            'description' => AppHelper::settings("live_match_description") ?:config('seotools.meta.defaults.description'),            
+        ],false);
         return view('frontend.live-match', compact('matches','parent','latest','popular','trendings','tags'));
     }
 
@@ -270,8 +283,41 @@ class HomeController extends Controller
 
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
-        AppHelper::setupSEO();
+
+        AppHelper::setupSEO([
+            'title' => $post->seoDetail?->title,
+            'description' => $post->seoDetail?->description,
+            'keywords' => $post->seoDetail->keywords ?? [],
+        ],false);
         return view('frontend.about-us', compact('post','parent','latest','popular','trendings','tags'));
+    }
+
+    public function advertise(Request $request){
+
+        $post = Post::where('slug','advertise')->where('status', 'published')->firstOrFail();
+        $cat_id = AppHelper::getNewsCatId();
+        $parent = AppHelper::getSportNewsCategory();
+
+        $latest = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+            if($cat_id)
+                return $query->where('category_id', '=', $cat_id);
+            return $query;
+        })->where('language',Session::get('lang'))->limit(4)->orderBy('id', 'desc')->get();
+        $popular = Post::published()->whereHas('categories', function ($query) use ($cat_id) {
+            if($cat_id)
+                return $query->where('category_id', '=', $cat_id);
+            return $query;
+        })->where('language',Session::get('lang'))->limit(3)->orderBy('id', 'desc')->get();
+
+        $trendings = AppHelper::getTrendingNews(5);
+        $tags = Tag::get();
+        
+        AppHelper::setupSEO([
+            'title' => $post->seoDetail?->title,
+            'description' => $post->seoDetail?->description,
+            'keywords' => $post->seoDetail->keywords ?? [],
+        ],false);
+        return view('frontend.advertise', compact('post','parent','latest','popular','trendings','tags'));
     }
 
     public function leagues(Request $request,$slug){
@@ -348,12 +394,12 @@ class HomeController extends Controller
         $post->comments()->create([
             'comment' => $request->comment,
             'user_id' => $request->user()->id,
-            'approved' => false,
+            'approved' => true,
         ]);
         AppHelper::setupSEO();
         return redirect()
             ->route('frontend.posts.show', $post->slug)
-            ->with('success', 'Comment submitted for approval.');
+            ->with('success', 'Comment submitted successfully.');
     }
 
     /**

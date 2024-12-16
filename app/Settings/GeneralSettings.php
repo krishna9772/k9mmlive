@@ -12,6 +12,15 @@ class GeneralSettings extends Settings
     public ?string $ads_image1;
     public ?string $ads_image2;
     public ?string $ads_image3;
+    public ?string $live_now_banner;
+    
+
+    public ?string $live_match_title;
+    public ?string $live_match_description;
+    
+    public ?string $live_schedule_title;
+    public ?string $live_schedule_description;
+    
 
     public static function group(): string
     {

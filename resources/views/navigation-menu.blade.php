@@ -9,7 +9,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex items-center shrink-0 grow">
-                    <a href="/">
+                    <a href="/" class="ml-auto mr-auto">
                         <x-application-mark class="block w-auto h-9" />
                     </a>
                 </div>
@@ -39,7 +39,7 @@
                     </x-nav-link>
                 </div>
                 <div class="flex items-center grow" >
-                    <form class="flex items-center max-w-sm ml-auto" action="{{ route('frontend.search') }}">
+                    <form class="flex items-center max-w-sm w-full" action="{{ route('frontend.search') }}">
                         <label for="simple-search" class="sr-only">{{ __('Search') }}</label>
                         <div class="relative w-full">
                             <div class="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">

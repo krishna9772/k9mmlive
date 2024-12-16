@@ -93,3 +93,11 @@ html[lang="my"] * {
 .w-122 {
     width: 122px;
 }
+
+.bg-red {
+    background-color: #ff0b0b;
+}
+
+#footer .fill-black {
+    fill: #fff !important;
+}

@@ -3,11 +3,11 @@
 namespace App\Filament\Pages;
 
 use App\Settings\GeneralSettings as Settings;
-use BladeUI\Icons\Components\Icon;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 use Guava\FilamentIconPicker\Forms\IconPicker;
@@ -35,6 +35,12 @@ class GeneralSettings extends SettingsPage
                 FileUpload::make('ads_image1'),
                 FileUpload::make('ads_image2'),
                 FileUpload::make('ads_image3'),
+                FileUpload::make('live_now_banner'),
+                TextInput::make('live_match_title')->columnSpanFull(),
+                Textarea::make('live_match_description')->columnSpanFull(),
+                TextInput::make('live_schedule_title')->columnSpanFull(),
+                Textarea::make('live_schedule_description')->columnSpanFull(),
+                
             ])->columns(3);
     }
 

@@ -20,6 +20,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 Route::get('/search', [HomeController ::class, 'search'])->name('frontend.search');
 Route::get('/leagues/{slug}', [HomeController ::class, 'leagues'])->name('frontend.leagues.show');
 Route::get('/about-us', [HomeController ::class, 'aboutUs'])->name('frontend.aboutus');
+Route::get('/about-us/advertise', [HomeController ::class, 'advertise'])->name('frontend.advertise');
 Route::get('/tag/{slug}', [HomeController ::class, 'tags'])->name('frontend.tags.show');
 Route::get('/category/{slug}', [HomeController ::class, 'category'])->name('frontend.categories.show');
 Route::post('/comment/{post:slug}/store', [HomeController::class, 'comment'])->middleware('auth')->name('comment.store');

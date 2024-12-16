@@ -25,7 +25,7 @@
     <div class="self-end w-full mt-auto">
         @if ($match->live_now)
             <a target="{{$match->live_link? '_blank':'_self'}}" href="{{ $match->live_link ?: route('frontend.sport.live-match',[$match->slug])  }}">
-                <button type="button" class="w-full px-3 py-2 mb-2 font-medium text-center text-white bg-green-400 rounded-full hover:bg-green-300 focus:outline-none focus:ring-4 focus:ring-green-300 me-2 dark:bg-green-500 dark:hover:bg-green-600 font-bebas dark:focus:ring-green-500">{{ strtoupper(__('Watch Live')) }}</button>
+                <button type="button" class="shadow-md w-full px-3 py-2 mb-2 font-medium text-center text-white bg-red-600 rounded-full hover:bg-red-400 focus:outline-none focus:ring-4 focus:ring-red-400 me-2 dark:bg-red-600 dark:hover:bg-red-700 font-bebas dark:focus:ring-red-400">{{ strtoupper(__('Watch Live')) }}</button>
             </a>
         @endif
     </div>

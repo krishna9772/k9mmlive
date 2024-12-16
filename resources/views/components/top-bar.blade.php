@@ -13,17 +13,17 @@ if(isset($params['lang'])) unset($params['lang']);
             </button>
 
             <div class="flex items-center space-x-4">
-                <x-nav-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=my':'?lang=my') }}" :active="app()->getLocale()==='my'" class="font-bold">
-                    {{ __('MM') }}
-                </x-nav-link>
+                <x-lang-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=my':'?lang=my') }}" :active="app()->getLocale()==='my'">                    
+                    <span class="fi fi-mm"></span>
+                </x-lang-link>
                 <span class="text-gray-500 dark:text-gray-400">|</span>
-                <x-nav-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=en':'?lang=en') }}" :active="app()->getLocale()==='en'" class="font-bold">
-                    {{ __('ENG') }}
-                </x-nav-link>
+                <x-lang-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=en':'?lang=en') }}" :active="app()->getLocale()==='en'">                    
+                    <span class="fi fi-gb"></span>
+                </x-lang-link>
                 <span class="text-gray-500 dark:text-gray-400">|</span>
-                <x-nav-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=zh':'?lang=zh') }}" :active="app()->getLocale()==='zh'" class="font-bold">
-                    {{ __('CH') }}
-                </x-nav-link>
+                <x-lang-link  href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=zh':'?lang=zh') }}" :active="app()->getLocale()==='zh'">                    
+                    <span class="fi fi-cn"></span>
+                </x-lang-link>
             </div>
             <div>
                 @if(auth()->user())

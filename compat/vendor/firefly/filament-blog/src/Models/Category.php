@@ -5,6 +5,7 @@ namespace Firefly\FilamentBlog\Models;
 use App\Helpers\AppHelper;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -22,6 +23,9 @@ class Category extends Model
         'name',
         'slug',
         'language',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
     ];
 
     protected $casts = [
@@ -55,6 +59,12 @@ class Category extends Model
                 ->searchable()
                 ->required()
                 ->default(AppHelper::defaultLanguage()),
+            TextInput::make('meta_title')                
+                ->maxLength(60),
+            Textarea::make('meta_description')                
+                ->maxLength(160),
+            TextInput::make('meta_keywords')                
+                ->maxLength(255),
             ];            
     }
 

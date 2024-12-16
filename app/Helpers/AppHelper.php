@@ -109,8 +109,8 @@ class AppHelper
       return 'en';
      }
 
-     public static function setupSEO($data=[]){
-      SEOMeta::setTitle(self::getVal($data,'title',config('seotools.meta.defaults.title')));
+     public static function setupSEO($data=[],$appended=true){
+      SEOMeta::setTitle(self::getVal($data,'title',config('seotools.meta.defaults.title')),$appended);
       SEOMeta::setDescription(self::getVal($data,'description',config('seotools.meta.defaults.description')));
       SEOMeta::setCanonical(self::getVal($data,'canonical',url()->current()));
       SEOMeta::setKeywords(self::getVal($data,'keywords',config('seotools.meta.defaults.keywords')));
