@@ -9,14 +9,14 @@
 @endpush
 
 <!-- Slider main container -->
-<div {{ $attributes->merge(['class' => 'swiper match-slider']) }}>
+<div {{ $attributes->merge(['class' => 'swiper match-slider']) }} style="padding-bottom:40px;">
     <!-- Additional required wrapper -->
     <div class="flex items-stretch swiper-wrapper">
       <!-- Slides -->
       {{ $slot }}
     </div>
     <!-- If we need pagination -->
-    <div class="flex flex-row justify-center swiper-pagination pe-4"></div>
+    <div class="flex flex-row justify-center swiper-pagination mt-5 pe-4"></div>
     <!-- If we need navigation buttons -->
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
