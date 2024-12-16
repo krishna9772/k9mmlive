@@ -59,12 +59,9 @@ class Category extends Model
                 ->searchable()
                 ->required()
                 ->default(AppHelper::defaultLanguage()),
-            TextInput::make('meta_title')                
-                ->maxLength(60),
-            Textarea::make('meta_description')                
-                ->maxLength(160),
-            TextInput::make('meta_keywords')                
-                ->maxLength(255),
+            TextInput::make('meta_title'),                
+            Textarea::make('meta_description'),
+            TextInput::make('meta_keywords'),
             ];            
     }
 
