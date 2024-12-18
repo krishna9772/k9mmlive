@@ -36,6 +36,15 @@
                 </div>
             </div>
             <div class="latest-news">
+                @if ($match->live_now && $match->live_link)
+                    <div class="mb-3">
+                        <iframe
+                        src="{{ $match->live_link }}/embed/chat/readwrite"
+                        height="580px"
+                      ></iframe>
+                    </div>    
+                @endif
+                
                 <x-widgets.tags-list :tags="$tags"/>
                 <div class="mt-5 mb-5 ads-1">
                     <img class="w-full rounded" src="{{ asset('storage/'.$ads1) }}" alt="ads-1">
