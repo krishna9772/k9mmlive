@@ -1,1 +1,1 @@
-<img src="{{ url('images/MM Media Logo.png') }}" alt="" srcset="">
+<img src="{{ url('img/MM Media Logo.png') }}" style="max-height: 120px;" alt="" srcset="">
