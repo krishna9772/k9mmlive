@@ -39,7 +39,7 @@
                 @if (true || $match->live_now && $match->live_link)
                     <div class="mb-3">
                         <iframe class='live-chat-iframe'
-                        src="https://mthrbord.tv/embed/chat/readwrite"
+                        src="{{$match->live_link}}/embed/chat/readwrite"
                         height="580px"
                       ></iframe>
                     </div>    
