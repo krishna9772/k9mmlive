@@ -101,3 +101,7 @@ html[lang="my"] * {
 #footer .fill-black {
     fill: #fff !important;
 }
+
+.live-chat-iframe {
+    width: 100%;
+}

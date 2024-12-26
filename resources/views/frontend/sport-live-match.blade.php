@@ -36,10 +36,10 @@
                 </div>
             </div>
             <div class="latest-news">
-                @if ($match->live_now && $match->live_link)
+                @if (true || $match->live_now && $match->live_link)
                     <div class="mb-3">
-                        <iframe
-                        src="{{ $match->live_link }}/embed/chat/readwrite"
+                        <iframe class='live-chat-iframe'
+                        src="https://mthrbord.tv/embed/chat/readwrite"
                         height="580px"
                       ></iframe>
                     </div>    
