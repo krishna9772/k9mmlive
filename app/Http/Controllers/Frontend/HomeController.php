@@ -354,7 +354,7 @@ class HomeController extends Controller
         $tags = Tag::get();
         AppHelper::setupSEO(
             [
-                'title' => $league->title,
+                'title' => $league->name,
                 'description' => Str::limit(strip_tags($league->description), 255),   
                 'image' => asset($league->image_path),                   
                 'url' => url()->current(), 
