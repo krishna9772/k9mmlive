@@ -17,7 +17,7 @@
         <div class="grid grid-cols-1 gap-0 md:gap-4 xl:gap-4 md:grid-cols-4 xl:grid-cols-4">
             <div class="col-span-3">
                 <h3 class="text-3xl font-bebas dark:text-white">{{ $match->title }}</h3>
-                <div class="flex">
+                <div class="">
                     {!! $match->description !!}
                 </div>
                 @if ($match->live_embed)
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="latest-news">
-                @if (true || $match->live_now && $match->live_link)
+                @if ($match->live_now && $match->live_link)
                     <div class="mb-3">
                         <iframe class='live-chat-iframe'
                         src="{{$match->live_link}}/embed/chat/readwrite"
