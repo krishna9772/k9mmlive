@@ -352,7 +352,14 @@ class HomeController extends Controller
         })->limit(3)->orderBy('id', 'desc')->get();
         $trendings = AppHelper::getTrendingNews(5);
         $tags = Tag::get();
-        AppHelper::setupSEO();
+        AppHelper::setupSEO(
+            [
+                'title' => $league->title,
+                'description' => Str::limit(strip_tags($league->description), 255),   
+                'image' => asset($league->image_path),                   
+                'url' => url()->current(), 
+            ]
+        );
         return view('frontend.leagues', compact('matches','league','parent','latest','popular','trendings','tags'));
     }
 

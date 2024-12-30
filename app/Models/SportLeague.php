@@ -33,8 +33,19 @@ class SportLeague extends Model
         ];
     }
 
+    protected $appends = [
+        'image_path',
+    ];
+
+
     public function sportType()
     {
         return $this->belongsTo(SportType::class);
     }
+
+    public function getImagePathAttribute()
+    {
+        return asset('storage/'.$this->image);
+    }
+
 }
