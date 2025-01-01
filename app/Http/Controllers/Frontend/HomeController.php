@@ -211,7 +211,7 @@ class HomeController extends Controller
         $footballs = AppHelper::footBallMatches($date);
         $boxings = AppHelper::boxingMatches($date);
         $esports = AppHelper::esportMatches($date);
-        $futsals = AppHelper::esportMatches($date);
+        $futsals = AppHelper::futsalMatches($date);
         $cat_id = AppHelper::getNewsCatId();
 
         $parent = AppHelper::getSportNewsCategory();
