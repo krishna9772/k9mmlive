@@ -211,7 +211,7 @@ class HomeController extends Controller
         $footballs = AppHelper::footBallMatches($date);
         $boxings = AppHelper::boxingMatches($date);
         $esports = AppHelper::esportMatches($date);
-        $futsal = AppHelper::esportMatches($date);
+        $futsals = AppHelper::esportMatches($date);
         $cat_id = AppHelper::getNewsCatId();
 
         $parent = AppHelper::getSportNewsCategory();
@@ -236,7 +236,7 @@ class HomeController extends Controller
             'title' => AppHelper::settings("live_schedule_title") ?:config('seotools.meta.defaults.title'),
             'description' => AppHelper::settings("live_schedule_description") ?:config('seotools.meta.defaults.description'),            
         ],false);
-        return view('frontend.live-schedule', compact('futsal','footballs','boxings','esports','date','parent','latest','popular','trendings','tags'));
+        return view('frontend.live-schedule', compact('futsals','footballs','boxings','esports','date','parent','latest','popular','trendings','tags'));
     }
 
     public function liveMatch(Request $request){
