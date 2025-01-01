@@ -66,7 +66,7 @@ class AppHelper
      {
         //return self::footBallMatches($date,$limit);
 
-        $type = SportType::where('status', Status::Active->value)->whereIn('name', ['esport',"Futsal"])->first();
+        $type = SportType::where('status', Status::Active->value)->whereIn('name', ['futsal',"Futsal"])->first();
         $query = SportMatch::where('status', Status::Active->value)->where('sport_type_id', $type->id??0);
         if($limit){
             $query = $query->limit($limit);
