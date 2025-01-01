@@ -42,10 +42,10 @@
                 </div>
                     <x-widgets.matches-type1 :matches="$footballs" class="mt-5 football" :title="__('FOOTBALL')" />
 
-                    <x-widgets.matches-type2 :matches="$boxings" class="mt-5 boxing" :title="__('BOXING')" />
+                    <x-widgets.matches-type1 :matches="$boxings" class="mt-5 boxing" :title="__('BOXING')" />
 
-                    <x-widgets.matches-type3 :matches="$esports" class="mt-5 esport" :title="__('ESPORTS')" />
-                    <x-widgets.matches-type3 :matches="$futsals" class="mt-5 esport" :title="__('FUTSAL')" />
+                    <x-widgets.matches-type1 :matches="$esports" class="mt-5 esport" :title="__('ESPORTS')" />
+                    <x-widgets.matches-type1 :matches="$futsals" class="mt-5 esport" :title="__('FUTSAL')" />
                     
             </div>
             <div class="latest-news">
