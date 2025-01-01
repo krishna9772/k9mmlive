@@ -62,6 +62,21 @@ class AppHelper
         return $query->orderBy('date_time')->get();
      }
 
+     public static function futsalMatches($date=null,$limit=null)
+     {
+        //return self::footBallMatches($date,$limit);
+
+        $type = SportType::where('status', Status::Active->value)->whereIn('name', ['esport',"Futsal"])->first();
+        $query = SportMatch::where('status', Status::Active->value)->where('sport_type_id', $type->id??0);
+        if($limit){
+            $query = $query->limit($limit);
+        }
+        if($date){
+            $query = $query->whereDate('date_time','=',$date);
+        }
+        return $query->orderBy('date_time')->get();
+     }
+
      public static function getSportNewsCategory(){
 
         return Category::where('slug', 'sport-news')->first();

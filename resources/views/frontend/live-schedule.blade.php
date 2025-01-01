@@ -45,7 +45,8 @@
                     <x-widgets.matches-type2 :matches="$boxings" class="mt-5 boxing" :title="__('BOXING')" />
 
                     <x-widgets.matches-type3 :matches="$esports" class="mt-5 esport" :title="__('ESPORTS')" />
-
+                    <x-widgets.matches-type3 :matches="$futsals" class="mt-5 esport" :title="__('FUTSAL')" />
+                    
             </div>
             <div class="latest-news">
                 <div class="mb-5">
