@@ -31,7 +31,7 @@
                 @else
                 <div>
                     @if($banner)
-                    <img src="{{ $banner }}" class="w-full rounded-lg" alt="" srcset="">
+                    <img src="{{ asset('storage/'.$banner) }}" class="w-full rounded-lg" alt="" srcset="">
                     @endif
                 </div>
                 
