@@ -1,6 +1,7 @@
 @php
     $ads1 = \App\Helpers\AppHelper::settings("ads_image1");
 
+    $ads1 = \App\Helpers\AppHelper::settings("ads_image1");
     $params = request()->all();
     if(isset($params['lang'])) unset($params['lang']);
     if(isset($params['date'])) unset($params['date']);
@@ -25,7 +26,9 @@
                 <x-image-slider>
                     @foreach ($sliders as   $slider)
                         <div class="swiper-slide">
-                            <x-image class="mx-auto" :src="$slider->image_path" :alt="$slider->title" />
+                            <a href="{{ $slider->link }}">
+                                <x-image class="mx-auto" :src="$slider->image_path" :alt="$slider->title" />
+                            </a>
                         </div>
                     @endforeach
                 </x-image-slider>

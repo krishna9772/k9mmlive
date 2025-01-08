@@ -13,6 +13,7 @@ class ImageSlider extends Model
         'title',
         'image',
         'status',
+        'link',
         'description',
     ];
 
