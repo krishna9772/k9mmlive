@@ -1,5 +1,6 @@
 @php
     $ads1 = \App\Helpers\AppHelper::settings("ads_image1");
+    $ads1_link = \App\Helpers\AppHelper::settings("ads_image1_link");
 @endphp
 <x-app-layout>
     <div class="px-4 pt-5 mx-auto banner min-h-30 max-w-7xl sm:px-6 lg:px-8">

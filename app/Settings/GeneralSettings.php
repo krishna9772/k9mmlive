@@ -13,6 +13,11 @@ class GeneralSettings extends Settings
     public ?string $ads_image2;
     public ?string $ads_image3;
     public ?string $live_now_banner;
+
+    public ?string $ads_image1_link;
+    public ?string $ads_image2_link;
+    public ?string $ads_image3_link;
+    public ?string $live_now_banner_link;
     
 
     public ?string $live_match_title;

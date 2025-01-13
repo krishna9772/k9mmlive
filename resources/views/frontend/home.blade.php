@@ -2,6 +2,7 @@
     $ads1 = \App\Helpers\AppHelper::settings("ads_image1");
 
     $ads1 = \App\Helpers\AppHelper::settings("ads_image1");
+    $ads1_link = \App\Helpers\AppHelper::settings("ads_image1_link");
     $params = request()->all();
     if(isset($params['lang'])) unset($params['lang']);
     if(isset($params['date'])) unset($params['date']);
@@ -68,7 +69,9 @@
             <div class="latest-news">
                 <x-blog-post-list :posts="$latest" :title="'LATEST NEWS'" />
                 <div class="mt-5 mb-5 ads-1">
-                    <img class="w-full rounded" src="{{ asset('storage/'.$ads1) }}" alt="ads-1">
+                    <a href="{{ $ads1_link }}" target="_blank">
+                        <img class="w-full rounded" src="{{ asset('storage/'.$ads1) }}" alt="ads-1">
+                    </a>
                 </div>
                 <x-blog-post-list :posts="$popular" :title="'TRENDING NEWS'" />
             </div>

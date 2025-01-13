@@ -36,6 +36,12 @@ class GeneralSettings extends SettingsPage
                 FileUpload::make('ads_image2'),
                 FileUpload::make('ads_image3'),
                 FileUpload::make('live_now_banner'),
+                
+                TextInput::make('ads_image1_link'),
+                TextInput::make('ads_image2_link'),
+                TextInput::make('ads_image3_link'),
+                TextInput::make('live_now_banner_link'),
+
                 TextInput::make('live_match_title')->columnSpanFull(),
                 Textarea::make('live_match_description')->columnSpanFull(),
                 TextInput::make('live_schedule_title')->columnSpanFull(),

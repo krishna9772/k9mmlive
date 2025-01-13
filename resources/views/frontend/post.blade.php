@@ -1,5 +1,6 @@
 @php
     $ads1 = \App\Helpers\AppHelper::settings("ads_image1");
+    $ads1_link = \App\Helpers\AppHelper::settings("ads_image1_link");
 @endphp
 <x-app-layout>
     <div class="px-4 pt-5 mx-auto banner min-h-30 max-w-7xl sm:px-6 lg:px-8">
@@ -83,7 +84,9 @@
             <div class="latest-news">
                 <x-widgets.tags-list :tags="$tags"/>
                 <div class="mt-5 mb-5 ads-1">
+                    <a href="{{ $ads1_link }}" target="_blank">
                     <img class="w-full rounded" src="{{ asset('storage/'.$ads1) }}" alt="ads-1">
+                    </a>
                 </div>
                 <x-blog-post-list :posts="$latest" :title="'LATEST NEWS'" />
             </div>
