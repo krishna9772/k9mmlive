@@ -45,6 +45,10 @@ class SocialLinkResource extends Resource
                     ->preload(true),
                 Forms\Components\FileUpload::make('image')
                     ->image(),
+                Forms\Components\FileUpload::make('image_mm')->label("Image MM")
+                    ->image(),
+                Forms\Components\FileUpload::make('image_ch')->label("Image Ch")
+                    ->image(),
                 Forms\Components\TextInput::make('link')
                     ->maxLength(255)->columnSpanFull(),
             ]);
