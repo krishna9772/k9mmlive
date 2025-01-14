@@ -13,33 +13,33 @@ if(isset($params['lang'])) unset($params['lang']);
             </button>
 
             <div class="flex items-center space-x-4">
-                <x-lang-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=my':'?lang=my') }}" :active="app()->getLocale()==='my'">                    
+                <x-lang-link href="{{ switch_language_url('my')}}" :active="app()->getLocale()==='my'">                    
                     <span class="fi fi-mm"></span>
                 </x-lang-link>
                 <span class="text-gray-500 dark:text-gray-400">|</span>
-                <x-lang-link href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=en':'?lang=en') }}" :active="app()->getLocale()==='en'">                    
+                <x-lang-link href="{{ switch_language_url('en')}}" :active="app()->getLocale()==='en'">                    
                     <span class="fi fi-gb"></span>
                 </x-lang-link>
                 <span class="text-gray-500 dark:text-gray-400">|</span>
-                <x-lang-link  href="{{ url(Request::fullUrlWithoutQuery(['lang'])).($params? '&lang=zh':'?lang=zh') }}" :active="app()->getLocale()==='zh'">                    
+                <x-lang-link  href="{{ switch_language_url('zh') }}" :active="app()->getLocale()==='zh'">                    
                     <span class="fi fi-cn"></span>
                 </x-lang-link>
             </div>
             <div>
                 @if(auth()->user())
-                    <x-nav-link href="{{ route('logout') }}" class="font-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <x-nav-link href="{{ lang_route('logout') }}" class="font-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <x-icon name="fas-user" class='mr-1' width="13" height="13" />
                         {{ __('Logout') }} ({{ auth()->user()->name }})
                     </x-nav-link>
-                    <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                    <form id="logout-form" method="POST" action="{{ lang_route('logout') }}" style="display: none;">
                         @csrf
                     </form>
                 @else
-                    <x-nav-link href="{{ route('login') }}" class="font-bold">
+                    <x-nav-link href="{{ lang_route('login') }}" class="font-bold">
                         {{ __('Login') }}
                     </x-nav-link>
                     <span class="text-gray-500 dark:text-gray-400">|</span>
-                    <x-nav-link href="{{ route('register') }}" class="font-bold">
+                    <x-nav-link href="{{ lang_route('register') }}" class="font-bold">
                         {{ __('Register') }}
                     </x-nav-link>
                 @endif
@@ -71,12 +71,12 @@ if(isset($params['lang'])) unset($params['lang']);
                                         </div>
 
                                         <!-- Team Settings -->
-                                        <x-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
+                                        <x-dropdown-link href="{{ lang_route('teams.show', Auth::user()->currentTeam->id) }}">
                                             {{ __('Team Settings') }}
                                         </x-dropdown-link>
 
                                         @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                                            <x-dropdown-link href="{{ route('teams.create') }}">
+                                            <x-dropdown-link href="{{ lang_route('teams.create') }}">
                                                 {{ __('Create New Team') }}
                                             </x-dropdown-link>
                                         @endcan
@@ -128,12 +128,12 @@ if(isset($params['lang'])) unset($params['lang']);
                                     {{ __('Manage Account') }}
                                 </div>
 
-                                <x-dropdown-link href="{{ route('profile.show') }}">
+                                <x-dropdown-link href="{{ lang_route('profile.show') }}">
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                    <x-dropdown-link href="{{ route('api-tokens.index') }}">
+                                    <x-dropdown-link href="{{ lang_route('api-tokens.index') }}">
                                         {{ __('API Tokens') }}
                                     </x-dropdown-link>
                                 @endif
@@ -141,10 +141,10 @@ if(isset($params['lang'])) unset($params['lang']);
                                 <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
                                 <!-- Authentication -->
-                                <form method="POST" action="{{ route('logout') }}" x-data>
+                                <form method="POST" action="{{ lang_route('logout') }}" x-data>
                                     @csrf
 
-                                    <x-dropdown-link href="{{ route('logout') }}"
+                                    <x-dropdown-link href="{{ lang_route('logout') }}"
                                              @click.prevent="$root.submit();">
                                         {{ __('Log Out') }}
                                     </x-dropdown-link>
@@ -153,11 +153,11 @@ if(isset($params['lang'])) unset($params['lang']);
                         </x-dropdown>
                     </div>
                     @else
-                        <x-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                        <x-nav-link href="{{ lang_route('register') }}" :active="request()->routeIs('register')">
                             {{ __('Register') }}
                         </x-nav-link>
 
-                        <x-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                        <x-nav-link href="{{ lang_route('login') }}" :active="request()->routeIs('login')">
                             {{ __('Log in') }}
                         </x-nav-link>
                     @endif

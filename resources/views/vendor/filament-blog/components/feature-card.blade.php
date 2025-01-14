@@ -6,12 +6,12 @@
     <div class="flex flex-col justify-center space-y-10 py-4 sm:pl-10">
         <div>
             <div class="mb-5">
-                <a href="{{ route('filamentblog.post.show', ['post' => $post->slug]) }}" class="mb-4 block text-xl md:text-4xl font-semibold hover:text-blue-600">
+                <a href="{{ lang_route('filamentblog.post.show', ['post' => $post->slug]) }}" class="mb-4 block text-xl md:text-4xl font-semibold hover:text-blue-600">
                     {{ $post->title }}
                 </a>
                 <div>
                     @foreach ($post->categories as $category)
-                    <a href="{{ route('filamentblog.category.post', ['category' => $category->slug]) }}">
+                    <a href="{{ lang_route('filamentblog.category.post', ['category' => $category->slug]) }}">
                         <span class="bg-primary-200 text-primary-800 mr-2 inline-flex rounded-full px-2 py-1 text-xs font-semibold">{{ $category->name }}
                         </span>
                     </a>

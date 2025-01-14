@@ -11,7 +11,7 @@
                         {{ $tag->name }}
                     </span>
                 @endforeach
-                <a href="{{ route('frontend.posts.show', $post->slug) }}" class="text-lg text-gray-900 font-bebas dark:text-white">
+                <a href="{{ lang_route('frontend.posts.show', ['slug'=>$post->slug]) }}" class="text-lg text-gray-900 font-bebas dark:text-white">
                     <p class="text-sm text-gray-900 dark:text-white line-clamp-3">{{ $post->title }}</p>
                 </a>
                 <div class="flex mt-2 text-xs text-gray-500">

@@ -16,30 +16,30 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden {{$_class}} font-bebas sm:-my-px sm:ms-10 sm:flex grow">
-                    <x-nav-link href="{{ url('/') }}" :active="request()->is('/')">
+                    <x-nav-link href="{{ lang_route('frontend.home') }}" :active="request()->is('/')">
                         <span class="text-xl text-uppercase">{{ __('Home') }}</span>
                     </x-nav-link>
-                    <x-nav-link href="/live-match" :active="request()->is('*live-match*')">
+                    <x-nav-link href="{{lang_route('frontend.live-match') }}" :active="request()->is('*live-match*')">
                         <span class="text-xl text-uppercase">{{ __('Live Match') }}</span>
                     </x-nav-link>
-                    <x-nav-link href="/category/sport-articles" :active="request()->is('*sport-articles*')">
+                    <x-nav-link href="{{ lang_route('frontend.categories.show',['slug' => 'sport-articles']) }}" :active="request()->is('*sport-articles*')">
                         <span class="text-xl text-uppercase">{{ __('Sport Articles') }}</span>
                     </x-nav-link>
-                    <x-nav-link href="/category/sport-news" :active="request()->is('*sport-news*')">
+                    <x-nav-link href="{{ lang_route('frontend.categories.show',['slug' => 'sport-news']) }}" :active="request()->is('*sport-news*')">
                         <span class="text-xl text-uppercase">{{ __('Sport News') }}</span>
                     </x-nav-link>
-                    <x-nav-link href="/category/videos" :active="request()->is('*videos*')">
+                    <x-nav-link href="{{ lang_route('frontend.categories.show',['slug' => 'videos']) }}" :active="request()->is('*videos*')">
                         <span class="text-xl text-uppercase">{{ __('Videos') }}</span>
                     </x-nav-link>
-                    <x-nav-link href="/live-schedule" :active="request()->is('*live-schedule*')">
+                    <x-nav-link href="{{ lang_route('frontend.live-schedule') }}" :active="request()->is('*live-schedule*')">
                         <span class="text-xl text-uppercase">{{ __('Live Schedule') }}</span>
                     </x-nav-link>
-                    <x-nav-link href="/about-us" :active="request()->is('*about-us*')">
+                    <x-nav-link href="{{ lang_route('frontend.aboutus') }}" :active="request()->is('*about-us*')">
                         <span class="text-xl text-uppercase">{{ __('About Us') }}</span>
                     </x-nav-link>
                 </div>
                 <div class="flex items-center grow" >
-                    <form class="flex items-center max-w-sm w-full" action="{{ route('frontend.search') }}">
+                    <form class="flex items-center max-w-sm w-full" action="{{ lang_route('frontend.search') }}">
                         <label for="simple-search" class="sr-only">{{ __('Search') }}</label>
                         <div class="relative w-full">
                             <div class="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
@@ -106,21 +106,21 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                <x-responsive-nav-link href="{{ lang_route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                    <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
+                    <x-responsive-nav-link href="{{ lang_route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
                     </x-responsive-nav-link>
                 @endif
 
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}" x-data>
+                <form method="POST" action="{{ lang_route('logout') }}" x-data>
                     @csrf
 
-                    <x-responsive-nav-link href="{{ route('logout') }}"
+                    <x-responsive-nav-link href="{{ lang_route('logout') }}"
                                    @click.prevent="$root.submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
@@ -135,12 +135,12 @@
                     </div>
 
                     <!-- Team Settings -->
-                    <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
+                    <x-responsive-nav-link href="{{ lang_route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
                         {{ __('Team Settings') }}
                     </x-responsive-nav-link>
 
                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                        <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
+                        <x-responsive-nav-link href="{{ lang_route('teams.create') }}" :active="request()->routeIs('teams.create')">
                             {{ __('Create New Team') }}
                         </x-responsive-nav-link>
                     @endcan

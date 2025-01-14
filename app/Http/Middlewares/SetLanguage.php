@@ -14,22 +14,15 @@ class SetLanguage
 {
     public function handle($request, Closure $next)
     {
-        // Check for 'lang' parameter in the URL
-        if ($request->has('lang')) {
-            $lang = $request->get('lang');
-            Session::put('lang', $lang); // Store in session
-            //Cookie::make('lang',$lang);
+        $lang = $request->route('lang');
+
+        if (in_array($lang, ['en', 'my', 'zh'])) { // Add supported languages            
+            App::setLocale($lang);
         } else {
-            // Use session-stored language or default to 'en'                    
-            $lang = Session::get('lang');
-            if($lang==null){
-                $lang = Session::put('lang', 'en');
-                $lang = 'en';
-            }                
-            //$lang = Cookie::get('lang', 'en');
+            //return redirect()->route('frontend.home',['lang' => 'en']);
+            //abort(404); // Handle unsupported languages
+            App::setLocale('en');
         }
-        // Set application locale
-        App::setLocale($lang);
 
         return $next($request);
     }

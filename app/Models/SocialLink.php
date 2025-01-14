@@ -13,7 +13,7 @@ class SocialLink extends Model
 
 
     public function imageLink(){
-        $lang = Session::get('lang');
+        $lang = app()->getLocale();
         if($lang=='my' && $this->image_mm ){
             return asset('storage/'.$this->image_mm);
         }else if($lang=='zh' && $this->image_ch ){

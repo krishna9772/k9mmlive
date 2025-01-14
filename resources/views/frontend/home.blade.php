@@ -13,7 +13,9 @@
     $tomorrow = http_build_query($params);
     $params['date']=$dd->addDays(-1)->format('Y-m-d');
     $yesterday  =  http_build_query($params);
-
+    
+    
+    
 @endphp
 <x-app-layout>
     <div class="px-4 pt-5 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -33,6 +35,7 @@
                         </div>
                     @endforeach
                 </x-image-slider>
+                
                 <div class="mt-4">
                     <div class="flex flex-col justify-between mb-3 md:flex-row">
                         <div class="flex">
@@ -66,6 +69,7 @@
 
                 </div>
             </div>
+            
             <div class="latest-news">
                 <x-blog-post-list :posts="$latest" :title="'LATEST NEWS'" />
                 <div class="mt-5 mb-5 ads-1">
@@ -78,5 +82,6 @@
 
         </div>
     </div>
+   
 </x-app-layout>
 

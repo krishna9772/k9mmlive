@@ -21,7 +21,7 @@
             <div id="accordion-sport-type-body-{{$type->id}}" class="hidden accordion-body" aria-labelledby="accordion-sport-type-heading-{{$type->id}}">
                 <div class="p-3 bg-white border border-gray-200 rounded-b-xl dark:border-gray-700 dark:bg-gray-900">
                     @foreach ($type->sportLeagues as $league)
-                        <a href="{{ url('leagues/'.$league->slug) }}" class="flex mt-3">
+                        <a href="{{ lang_route('frontend.leagues.show',['slug'=>$league->slug]) }}" class="flex mt-3">
                             <img class="object-contain w-10 h-10 border border-black rounded-full" src="{{ asset('storage/'.$league->image) }}"/>
                             <div class="inline-block my-auto text-sm font-medium align-middle dark:text-white ps-3">
                                 {{ $league->name }}

@@ -1,5 +1,5 @@
 @props(['post'])
-<form action="{{ route('comment.store', ['post' => $post->slug]) }}" method="POST" id="comments">
+<form action="{{ lang_route('comment.store', ['post' => $post->slug]) }}" method="POST" id="comments">
     @csrf
     <div class="border-t-2 py-10">
         <div class="mb-7">
@@ -29,7 +29,7 @@
                 </button>
             @else
                 <a
-                        href="{{ route('login') }}"
+                        href="{{ lang_route('login') }}"
                         class="bg-primary-600 hover:bg-primary-700 rounded-lg px-8 py-4 font-semibold text-white transition-all duration-300">
                     <span>Login</span>
                 </a>

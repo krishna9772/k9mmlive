@@ -95,7 +95,7 @@ class AppHelper
      public static function getTrendingNews($limit=1){
         return Post::whereHas('tags',function($query){
             $query->where('slug','trending-now');
-        })->where('status', 'published')->where('language',Session::get('lang'))->orderBy('id', 'desc')->limit($limit)->get();
+        })->where('status', 'published')->where('language',app()->getLocale())->orderBy('id', 'desc')->limit($limit)->get();
      }
 
      public static function settings($name)
@@ -110,7 +110,7 @@ class AppHelper
      }
 
      public static function isMM(){
-        return Session::get('lang') == 'my';
+        return app()->getLocale() == 'my';
      }
 
      public static function languages(){
