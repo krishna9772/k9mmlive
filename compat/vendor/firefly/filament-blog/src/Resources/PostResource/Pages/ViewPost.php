@@ -37,7 +37,7 @@ class ViewPost extends ViewRecord
                 ->requiresConfirmation()
                 ->icon('heroicon-o-eye')->url(function (Post $record) {
                     //return route('filamentblog.post.show', $record->slug);
-                    return lang_route('frontend.posts.show', ["lang"=>"en","slug"=>$record->slug]);                    
+                    return route('frontend.posts.show', ["lang"=>"en","slug"=>$record->slug]);                    
                 }, true)
                 ->disabled(function (Post $record) {
                     return $record->isNotPublished();

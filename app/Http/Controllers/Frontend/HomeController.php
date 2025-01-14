@@ -410,7 +410,7 @@ class HomeController extends Controller
         ]);
         AppHelper::setupSEO();
         return redirect()
-            ->route('frontend.posts.show', $post->slug)
+            ->route('frontend.posts.show', ["lang"=>app()->getLocale(),"slug"=>$post->slug])
             ->with('success', 'Comment submitted successfully.');
     }
 
